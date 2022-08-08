@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="86a15d91-5f19-4b50-9494-a4eaf5274ae4" name="Changes" comment="Tutto rotto" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/LoginService">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/PaymentService">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/TicketCatalogueService">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/TravelerService">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/TicketCatalogueService">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TicketCatalogueService" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TicketCatalogueService" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29NaJCAsV6ns6pCS7udGkXjaaRF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TravelerService" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\david\Desktop\Magistrale\webapplications2\wa2-lab5\PaymentService\src\main\kotlin\it\polito\wa2\group18\paymentservice\Entities" />
+      <recent name="D:\Users\david\Desktop\Magistrale\webapplications2\wa2-lab5\PaymentService\src\main\kotlin\it\polito\wa2\group18\paymentservice" />
+      <recent name="D:\Users\david\Desktop\Magistrale\webapplications2\wa2-lab5\TicketCatalogueService\src\main\kotlin\it\polito\wa2\group18\ticketcatalogueservice" />
+      <recent name="D:\Users\david\Desktop\Magistrale\webapplications2\wa2-lab5\TicketCatalogueService\src\main\kotlin\it\polito\wa2\group18\ticketcatalogueservice\Entities" />
+      <recent name="D:\_uni\magistrale\WebApp2\wa2-lab5\PaymentService\src\main\resources" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="it.polito.wa2.group18.ticketcatalogueservice.Kafka" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.TicketCatalogueServiceApplication">
+    <configuration name="Payment+Catalogue" type="CompoundRunConfigurationType">
+      <toRun name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" />
+      <toRun name="TicketCatalogueServiceApplication" type="SpringBootApplicationConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" />
+      <toRun name="TicketCatalogueServiceApplication" type="SpringBootApplicationConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TicketCatalogueService [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TicketCatalogueService" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="PaymentService.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.paymentservice.PaymentServiceApplication" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TicketCatalogueServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="TicketCatalogueService.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.ticketcatalogueservice.TicketCatalogueServiceApplication" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Compound.Payment+Catalogue" />
+      <item itemvalue="Gradle.TicketCatalogueService [build]" />
+      <item itemvalue="Spring Boot.PaymentServiceApplication" />
+      <item itemvalue="Spring Boot.TicketCatalogueServiceApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TicketCatalogueService [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86a15d91-5f19-4b50-9494-a4eaf5274ae4" name="Changes" comment="Tutto rotto" />
+      <created>1652955929865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652955929865</updated>
+      <workItem from="1652955934604" duration="139000" />
+      <workItem from="1652956132831" duration="1834000" />
+      <workItem from="1652958425907" duration="1257000" />
+      <workItem from="1653055848231" duration="3936000" />
+      <workItem from="1653059882875" duration="6214000" />
+      <workItem from="1653067593759" duration="408000" />
+      <workItem from="1653224910333" duration="7909000" />
+      <workItem from="1653397494121" duration="9041000" />
+      <workItem from="1653409576597" duration="2410000" />
+      <workItem from="1653639481845" duration="8960000" />
+      <workItem from="1653990339630" duration="7056000" />
+      <workItem from="1659974655707" duration="694000" />
+    </task>
+    <task id="LOCAL-00001" summary="Created two new services">
+      <created>1652957219013</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1652957219014</updated>
+    </task>
+    <task id="LOCAL-00002" summary="minor changes">
+      <created>1652957289130</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652957289130</updated>
+    </task>
+    <task id="LOCAL-00003" summary="minor changes">
+      <created>1652958829010</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1652958829010</updated>
+    </task>
+    <task id="LOCAL-00004" summary="introducing webflux and r2dbc">
+      <created>1653067905551</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653067905551</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: r2dbc now working">
+      <created>1653233785455</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653233785455</updated>
+    </task>
+    <task id="LOCAL-00006" summary="finished GET">
+      <created>1653408109900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653408109900</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: POST to create new ticket types">
+      <created>1653413159745</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653413159745</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Created two new services" />
+    <MESSAGE value="minor changes" />
+    <MESSAGE value="introducing webflux and r2dbc" />
+    <MESSAGE value="feat: r2dbc now working" />
+    <MESSAGE value="finished GET" />
+    <MESSAGE value="feat: POST to create new ticket types" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: POST to create new ticket types" />
+  </component>
+</project>
