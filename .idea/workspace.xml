@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86a15d91-5f19-4b50-9494-a4eaf5274ae4" name="Changes" comment="Tutto rotto" />
+    <list default="true" id="86a15d91-5f19-4b50-9494-a4eaf5274ae4" name="Changes" comment="Tutto rotto">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/src/main/kotlin/com/example/transitservice/TransitServiceApplication.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TransitService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TransitService/src/test/kotlin/com/example/transitservice/TransitServiceApplicationTests.kt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +30,9 @@
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/TicketCatalogueService">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/TransitService">
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/TravelerService">
@@ -94,21 +109,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="postgresql" />
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/TravelerService" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "17",
+    "spring.configuration.checksum": "782ac88359e231a061fd959740192bd6"
+  }
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -158,16 +165,23 @@
     </configuration>
     <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="PaymentService.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.paymentservice.PaymentServiceApplication" />
       <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.paymentservice.PaymentServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="TicketCatalogueServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="TicketCatalogueService.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.ticketcatalogueservice.TicketCatalogueServiceApplication" />
       <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.ticketcatalogueservice.TicketCatalogueServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TransitServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="TransitService.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.polito.wa2.group18.transitservice.TransitServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,6 +189,7 @@
     <list>
       <item itemvalue="Compound.Payment+Catalogue" />
       <item itemvalue="Gradle.TicketCatalogueService [build]" />
+      <item itemvalue="Spring Boot.TransitServiceApplication" />
       <item itemvalue="Spring Boot.PaymentServiceApplication" />
       <item itemvalue="Spring Boot.TicketCatalogueServiceApplication" />
     </list>
@@ -204,6 +219,7 @@
       <workItem from="1653639481845" duration="8960000" />
       <workItem from="1653990339630" duration="7056000" />
       <workItem from="1659974655707" duration="694000" />
+      <workItem from="1660041200678" duration="149000" />
     </task>
     <task id="LOCAL-00001" summary="Created two new services">
       <created>1652957219013</created>

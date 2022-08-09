@@ -1,4 +1,4 @@
-package com.example.transitservice
+package it.polito.wa2.group18.transitservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,6 +7,5 @@ import org.springframework.boot.runApplication
 class TransitServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<TransitServiceApplication>(*args)
-	////
+    runApplication<TransitServiceApplication>(*args)
 }
