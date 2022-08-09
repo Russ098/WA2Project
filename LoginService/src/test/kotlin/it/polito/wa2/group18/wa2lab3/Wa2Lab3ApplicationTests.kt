@@ -1,5 +1,5 @@
 package it.polito.wa2.group18.wa2lab3
-
+/*
 import it.polito.wa2.group18.wa2lab3.dtos.UserDTO
 import it.polito.wa2.group18.wa2lab3.dtos.toDTO
 import it.polito.wa2.group18.wa2lab3.entities.Activation
@@ -351,3 +351,4 @@ class UnitTests {
         assert(act.expirationTime!! > Date())
     }
 }
+*/
