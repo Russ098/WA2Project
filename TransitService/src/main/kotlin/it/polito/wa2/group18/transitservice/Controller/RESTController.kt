@@ -15,8 +15,10 @@ class RESTController {
 
     @GetMapping("readers/validate")
     fun validateJws(req: HttpServletRequest, @RequestBody qrCode : ByteArray?) : ResponseEntity<*>?{
-        val res = readerLayer.decodeQRCode(qrCode)
-        return ResponseEntity.status(200).body(res)
+        val jws = readerLayer.decodeQRCode(qrCode)
+
+
+        return ResponseEntity.status(200).body(jws)
     }
 
     @GetMapping("/user/prova")

@@ -20,7 +20,7 @@ class ReaderLogic : ReaderLayer{
         )))
         val res = qrCodeReader.decode(binBitmap)
         println("decodeQRCode(): " + res)
-        return  res.toString()
+        return  res.toString() //jws
     }
 
     override fun validateTicket(): Boolean {
