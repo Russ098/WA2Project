@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS transits;
 CREATE TABLE qrCodeReaders
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    password varchar (255),
-    active INT
+    jwt varchar (255)
 );
 
 CREATE TABLE transits

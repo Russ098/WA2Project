@@ -37,9 +37,6 @@ class TravelerLogic : TravelerLayer {
     lateinit var userProfileRepo: UserProfileRepository
 
     @Autowired
-    lateinit var jwtConfig: JwtConfiguration
-
-    @Autowired
     lateinit var jwtTicketConfig : JwtTicketConfig
 
     override fun getDetails(id: Long?): UserDetailsDTO? {

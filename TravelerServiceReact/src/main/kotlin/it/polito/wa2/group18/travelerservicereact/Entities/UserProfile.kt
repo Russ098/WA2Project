@@ -12,11 +12,11 @@ data class UserProfile (
     @Id
     @Column("id")
     var id : Long? = null,
-        @Column("name")
+    @Column("name")
     var name : String,
-        @Column("address")
+    @Column("address")
     var address : String,
-        @Column("date_of_birth")
+    @Column("date_of_birth")
     var date_of_birth : Date,
     @Column("telephone_number")
     var telephone_number : String,

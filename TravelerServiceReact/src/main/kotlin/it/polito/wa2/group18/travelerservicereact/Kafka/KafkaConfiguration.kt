@@ -11,7 +11,7 @@ import org.springframework.kafka.core.KafkaAdmin
 class KafkaConfiguration(
     @Value("\${spring.kafka.bootstrap-servers}")
     private val servers: String,
-    @Value("\${spring.kafka.template.default-topic}")
+    @Value("\${spring.kafka.template.requestTopic}")
     private val topicRequest: String,
     @Value("\${spring.kafka.template.responseTopic}")
     private val topicResponse: String
