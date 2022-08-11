@@ -1,22 +1,28 @@
-package it.polito.wa2.group18.wa2lab4.Entities
+package it.polito.wa2.group18.travelerservicereact.Entities
 
-import it.polito.wa2.group18.wa2lab4.DTOs.TicketPurchasedDTO
-import it.polito.wa2.group18.wa2lab4.DTOs.UserDetailsDTO
-import it.polito.wa2.group18.wa2lab4.DTOs.toDTO
-import javax.persistence.*
+
+import it.polito.wa2.group18.travelerservicereact.DTOs.TicketPurchasedDTO
+import it.polito.wa2.group18.travelerservicereact.DTOs.UserDetailsDTO
+import it.polito.wa2.group18.travelerservicereact.DTOs.toDTO
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 
 enum class Role{
     CUSTOMER,
     ADMIN
 }
 
-@Entity
+@Table("userDetails")
 class UserDetails (
     @Id
+    @Column("id")
     var id : Long? = null, // Foreign key for Users
-    @OneToMany
+    @Column("tickets")
     var tickets : List<TicketPurchased>? = emptyList(),
+    @Column("username")
     var username : String,
+    @Column("roles")
     var roles : String
 ){
     fun toDTO(): UserDetailsDTO {

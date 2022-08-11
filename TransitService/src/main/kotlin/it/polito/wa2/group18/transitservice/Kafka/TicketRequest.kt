@@ -7,5 +7,7 @@ data class TicketRequest (
     @JsonProperty("jws")
     val jws : String,
     @JsonProperty("timestamp")
-    val timestamp : Date
+    val timestamp : Date,
+    @JsonProperty("userID")
+    val userID : Long?
 )

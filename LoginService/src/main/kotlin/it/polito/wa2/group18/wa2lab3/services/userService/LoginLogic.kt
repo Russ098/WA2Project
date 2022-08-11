@@ -60,9 +60,6 @@ class LoginLogic : LoginLayer {
                     .setIssuedAt(Date())
                     .setExpiration(c.time)
                     .signWith(key).compact()
-
-        //println(jws)
-
         return jws
     }
 }

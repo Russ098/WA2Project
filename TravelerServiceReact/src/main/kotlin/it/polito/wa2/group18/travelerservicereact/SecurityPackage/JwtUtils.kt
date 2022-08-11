@@ -1,8 +1,8 @@
-package it.polito.wa2.group18.transitservice.SecurityPackage
+package it.polito.wa2.group18.travelerservicereact.SecurityPackage
 
 import io.jsonwebtoken.Jwts
-import it.polito.wa2.group18.transitservice.DTOs.UserDetailsDTO
-import it.polito.wa2.group18.transitservice.Entities.Role
+import it.polito.wa2.group18.travelerservicereact.DTOs.UserDetailsDTO
+import it.polito.wa2.group18.travelerservicereact.Entities.Role
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -37,7 +37,7 @@ class JwtUtils {
 
             val username = jws.body["credentials"].toString()
 
-            return UserDetailsDTO(rolesEnum, username)
+            return UserDetailsDTO(null, null, rolesEnum, username)
         } catch (e:Exception) { println(e); return null}
     }
 

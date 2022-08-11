@@ -1,4 +1,4 @@
-package it.polito.wa2.group18.transitservice.Kafka
+package it.polito.wa2.group18.travelerservicereact.Kafka
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,24 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-//E' IL PRODUCER
+//E' il Producer
 
 @RestController
-@RequestMapping("/ticketRequest")
+@RequestMapping("/transitResponse")
 class LogController(
-    @Value("\${spring.kafka.template.requestTopic}") val topic: String,
+    @Value("\${spring.kafka.template.responseTopic}") val topic: String,
     @Autowired
     private val kafkaTemplate: KafkaTemplate<String, Any>
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
     @PostMapping
-    fun getValidationKey(@Validated @RequestBody ticketRequest: TicketRequest): ResponseEntity<Any> {
+    fun post(@Validated @RequestBody travelerResponse: TravelerResponse): ResponseEntity<Any> {
         return try {
-            log.info("Receiving ticket request")
-            log.info("Sending message to Kafka {}", ticketRequest)
-            val message: Message<TicketRequest> = MessageBuilder
-                .withPayload(ticketRequest)
+            log.info("Receiving payment request")
+            log.info("Sending message to Kafka {}", travelerResponse)
+            val message: Message<TravelerResponse> = MessageBuilder
+                .withPayload(travelerResponse)
                 .setHeader(KafkaHeaders.TOPIC, topic)
 //                .setHeader("X-Custom-Header", "Custom header here")
                 .build()

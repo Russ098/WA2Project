@@ -1,4 +1,4 @@
-package it.polito.wa2.group18.transitservice.SecurityPackage
+package it.polito.wa2.group18.travelerservicereact.SecurityPackage
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

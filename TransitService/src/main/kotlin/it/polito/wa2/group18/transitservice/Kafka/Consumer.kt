@@ -28,12 +28,16 @@ class Consumer(
         kafkaTemplate.send(topic, msg)
     }*/
 
-    @KafkaListener(topics = ["\${spring.kafka.template.requestTopic}"], groupId = "ppr")
+    @KafkaListener(topics = ["\${spring.kafka.template.responseTopic}"], groupId = "ppr")
     fun listenGroupFoo(consumerRecord: ConsumerRecord<Any, TicketResponse>, ack: Acknowledgment) {
         logger.info("Message received {}", consumerRecord)
         val timestamp = consumerRecord.value().timestamp
         val userID = consumerRecord.value().userID
-        transitRepo.save(Transits(null, timestamp!!, userID)).subscribe()
+        val jws = consumerRecord.value().jws
+        val key = consumerRecord.value().key
+        // Validazione
+        // Puoi vedere il tipo di biglietto
+        transitRepo.save(Transits(null, timestamp!!, userID, jws)).subscribe()
 
         ack.acknowledge()
     }

@@ -1,4 +1,4 @@
-package it.polito.wa2.group18.transitservice.SecurityPackage
+package it.polito.wa2.group18.travelerservicereact.SecurityPackage
 
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.AuthenticationException

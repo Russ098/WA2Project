@@ -15,7 +15,6 @@ class Transits (
     @Column("userId")
     var userId : Long?,
     @Column("jws")
-    var jws : Long? //per biglietti a corsa singola: serve per verificare se
+    var jws : String? // per biglietti a corsa singola: serve per verificare se
                     // il biglietto è stato già utilizzato
-
 )
