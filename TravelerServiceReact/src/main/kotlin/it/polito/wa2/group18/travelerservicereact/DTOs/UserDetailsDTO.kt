@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 
 class UserDetailsDTO(val id: Long?,
-                     val tickets: List<TicketPurchasedDTO>?,
                      private val roles: List<Role>,
                      private val username : String)
     : org.springframework.security.core.userdetails.UserDetails{

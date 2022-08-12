@@ -22,5 +22,15 @@ class TravelerRouter {
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getProfile)
                 .andRoute(PUT("/my/profile")
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::saveProfile)
+                .andRoute(GET("/my/tickets")
+                        .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getTickets)
+                .andRoute(POST("/my/tickets")
+                        .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::buyTickets)
+                .andRoute(GET("/admin/travelers")
+                    .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getTravelers)
+                .andRoute(GET("/admin/traveler/{userID}/tickets")
+                    .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getTicketsByUserID)
+                .andRoute(GET("/admin/traveler/{userID}/profile")
+                    .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getProfileByUserID)
     }
 }

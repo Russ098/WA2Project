@@ -10,6 +10,7 @@ import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 
 @SpringBootApplication
+@EnableR2dbcRepositories
 class TravelerServiceReactApplication{
     companion object{
         @JvmStatic

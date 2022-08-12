@@ -2,35 +2,40 @@ package it.polito.wa2.group18.travelerservicereact.Entities
 
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.domain.Persistable
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import java.sql.Timestamp
+import java.time.Instant
 import java.util.*
 
 @Table("ticketPurchased")
 class TicketPurchased(
     @Id
     @Column("id")
-    val sub: Long = 0L,
+    var sub: Long? = null,
     @Column("iat")
-    val iat: Date = Date(),
+    val iat: Timestamp = Timestamp.from(Instant.now()),
     @Column("exp")
-    var exp: Date = Date(),
+    var exp: Timestamp = Timestamp.from(Instant.now()),
     @Column("zid")
     val zid: String,
     @Column("validFrom")
-    var validFrom: Date = Date(),
+    var validFrom: Timestamp = Timestamp.from(Instant.now()),
     @Column("ticketType")
     var ticketType: String = "",
     @Column("jws")
     var jws: String = "",
-)
+    @Column("userId")
+    var userId : Long? = 0L
+) : Persistable<Long?> {
+    override fun getId(): Long? {
+        return sub
+    }
 
-fun generateExp () : Date
-{
-    val c = Calendar.getInstance()
-    c.time=Date()
-    c.add(Calendar.HOUR, 1)
-    return c.time
+    override fun isNew(): Boolean {
+        return sub == null
+    }
 }
 
 
