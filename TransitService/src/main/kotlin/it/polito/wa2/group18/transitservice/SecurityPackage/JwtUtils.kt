@@ -51,4 +51,16 @@ class JwtUtils {
             return userId
         } catch (e:Exception) { println(e); return null}
     }
+
+    fun getReaderIDFromJwt(authToken : String) : Pair<Long?,String?>? {
+        val key = jwtConfig.key.toByteArray() // secret in application.properties
+        try {
+            val jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken)
+
+            val readerID = jws.body["sub"].toString().toLong()
+            val pwd = jws.body["credentials"].toString()
+
+            return Pair(readerID,pwd)
+        } catch (e:Exception) { println(e); return null}
+    }
 }

@@ -1,5 +1,6 @@
 package it.polito.wa2.group18.transitservice.Entities
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
@@ -15,6 +16,9 @@ class Transits (
     @Column("userId")
     var userId : Long?,
     @Column("jws")
-    var jws : String? // per biglietti a corsa singola: serve per verificare se
-                    // il biglietto è stato già utilizzato
-)
+    var jws : String?,
+    @Column("readerID")
+    var readerID : Long?,
+    @Column("valid")
+    var valid : Boolean?
+    )

@@ -10,6 +10,8 @@ class TicketResponse (
     var timestamp : Date?, //timestamp inviato da transitservice quando inizia la comunicazione Kafka
     @JsonProperty("jws") // se diverso da corsa singola sarà uguale NULL
     var jws : String?,
-    @JsonProperty("key") // se diverso da corsa singola sarà uguale NULL
-    var key : String?
+    @JsonProperty("readerID")
+    var readerID : Long?,
+    @JsonProperty("valid")
+    var valid : Boolean?
 )

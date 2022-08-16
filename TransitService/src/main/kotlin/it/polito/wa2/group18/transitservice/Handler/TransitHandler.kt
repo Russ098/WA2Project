@@ -67,16 +67,25 @@ class TransitHandler {
     }*/
 
     fun validateTicket(request: ServerRequest) : Mono<ServerResponse> {
+        println("EnterValidate")
         val jwt = request.headers().firstHeader(jwtConfig.headerName)!!.split(" ")[1]
-        val userId: Long? = jwtUtils.getUserIdFromJwt(jwt)
-
-        return request.bodyToMono<ByteArray>().flatMap {qrCode ->
-            val jws = decodeQRCode(qrCode)
-            // mandare anche userID al traveler per controllare il propietario del biglietto
-            logController.getValidationKey(TicketRequest(jws, Date(), userId))
-            ServerResponse.ok().body(BodyInserters.fromValue("Processing"))
+        val credentials = jwtUtils.getReaderIDFromJwt(jwt)
+        //TO DO: controllare che effettivamente validi un reader e la sua pwd
+        return qrCodeReadersRepo.existsByIdAndPwdEquals(credentials?.first, credentials?.second).flatMap{ it ->
+            println(credentials)
+            if (it == false) {
+                ServerResponse.badRequest().body(BodyInserters.fromValue("Bad Authentication"))
+            }else{
+                request.bodyToMono<ByteArray>().flatMap { qrCode ->
+                    val jws = decodeQRCode(qrCode)
+                    logController.getValidationKey(TicketRequest(jws, Date(), credentials?.first))
+                    ServerResponse.ok().body(BodyInserters.fromValue("Processing"))
+                }
+            }
+            .onErrorResume { println(it); ServerResponse.badRequest().build() }
         }
-        .onErrorResume { println(it); ServerResponse.badRequest().build() }
     }
 
+
+    // FUN X CONTROLLO READER DAL JWT CHECK READERID E PASSWORD
 }

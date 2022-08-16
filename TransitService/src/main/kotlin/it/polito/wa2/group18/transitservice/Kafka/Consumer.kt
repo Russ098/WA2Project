@@ -24,21 +24,16 @@ class Consumer(
     @Autowired
     lateinit var transitRepo : TransitRepository
 
-    /*fun sendMessage(msg: TicketRequest) {
-        kafkaTemplate.send(topic, msg)
-    }*/
-
     @KafkaListener(topics = ["\${spring.kafka.template.responseTopic}"], groupId = "ppr")
     fun listenGroupFoo(consumerRecord: ConsumerRecord<Any, TicketResponse>, ack: Acknowledgment) {
         logger.info("Message received {}", consumerRecord)
         val timestamp = consumerRecord.value().timestamp
         val userID = consumerRecord.value().userID
         val jws = consumerRecord.value().jws
-        val key = consumerRecord.value().key
-        // Validazione
-        // Puoi vedere il tipo di biglietto
-        transitRepo.save(Transits(null, timestamp!!, userID, jws)).subscribe()
+        val readerID = consumerRecord.value().readerID
+        val valid = consumerRecord.value().valid
 
+        transitRepo.save(Transits(null, timestamp!!, userID, jws, readerID, valid)).subscribe()
         ack.acknowledge()
     }
 }

@@ -12,4 +12,9 @@ interface TicketPurchasedRepository : ReactiveCrudRepository<TicketPurchased, St
     fun getBySub(ticketID: Long?) : Mono<TicketPurchasedDTO?>
 
     fun getAllByUserId(userId : Long?) : Flux<TicketPurchasedDTO?>
+
+    fun existsByJws(jws: String?) : Mono<Boolean>
+
+    fun getByJws(jws: String?) : Mono<TicketPurchasedDTO>
+
 }

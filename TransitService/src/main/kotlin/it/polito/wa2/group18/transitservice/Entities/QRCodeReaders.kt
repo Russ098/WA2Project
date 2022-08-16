@@ -9,6 +9,6 @@ class QRCodeReaders (
     @Id
     @Column("id")
     var id : Long?,
-    @Column("jwt")
-    var jwt : String,
+    @Column("pwd")
+    var pwd : String,
 )

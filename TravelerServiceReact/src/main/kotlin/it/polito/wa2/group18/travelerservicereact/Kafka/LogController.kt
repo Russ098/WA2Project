@@ -27,12 +27,12 @@ class LogController(
     private val log = LoggerFactory.getLogger(javaClass)
 
     @PostMapping
-    fun post(@Validated @RequestBody travelerResponse: TravelerResponse): ResponseEntity<Any> {
+    fun post(@Validated @RequestBody ticketResponse: TicketResponse): ResponseEntity<Any> {
         return try {
             log.info("Receiving payment request")
-            log.info("Sending message to Kafka {}", travelerResponse)
-            val message: Message<TravelerResponse> = MessageBuilder
-                .withPayload(travelerResponse)
+            log.info("Sending message to Kafka {}", ticketResponse)
+            val message: Message<TicketResponse> = MessageBuilder
+                .withPayload(ticketResponse)
                 .setHeader(KafkaHeaders.TOPIC, topic)
 //                .setHeader("X-Custom-Header", "Custom header here")
                 .build()

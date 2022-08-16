@@ -17,7 +17,7 @@ class TransitRouter {
         return RouterFunctions
                 .route(GET("/hello")
                         .and(accept(MediaType.APPLICATION_JSON)), transitHandler::hello)
-                .andRoute(GET("/readers/validate")
+                .andRoute(POST("/readers/validate")
                     .and(accept(MediaType.IMAGE_PNG)), transitHandler::validateTicket)
     }
 }

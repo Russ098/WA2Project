@@ -16,7 +16,7 @@ class KafkaProducerConfig(@Value("\${spring.kafka.bootstrap-servers}") private v
         val configProps: MutableMap<String, Any> = HashMap()
         configProps[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = servers
         configProps[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
-        configProps[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = TravelerResponseSerializer::class.java
+        configProps[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = TicketResponseSerializer::class.java
         return DefaultKafkaProducerFactory(configProps)
     }
 
