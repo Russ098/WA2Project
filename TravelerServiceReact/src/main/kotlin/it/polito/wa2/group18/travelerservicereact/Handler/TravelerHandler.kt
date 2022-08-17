@@ -16,6 +16,7 @@ import it.polito.wa2.group18.travelerservicereact.SecurityPackage.JwtTicketConfi
 import it.polito.wa2.group18.travelerservicereact.SecurityPackage.JwtUtils
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
@@ -156,5 +157,10 @@ class TravelerHandler {
                 ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(userProfile))
             }
             .onErrorResume { println(it); ServerResponse.badRequest().build() }
+    }
+
+    fun getSecret(request : ServerRequest) : Mono<ServerResponse>
+    {
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jwtConfig.ticketKey))
     }
 }

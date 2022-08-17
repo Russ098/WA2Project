@@ -3,14 +3,20 @@ package it.polito.wa2.group18.transitservice.SecurityPackage
 import io.jsonwebtoken.Jwts
 import it.polito.wa2.group18.transitservice.DTOs.UserDetailsDTO
 import it.polito.wa2.group18.transitservice.Entities.Role
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.relational.core.mapping.Column
 import org.springframework.stereotype.Component
+import java.sql.Timestamp
+import java.time.Instant
 
 @Component
 class JwtUtils {
 
     @Autowired
     lateinit var jwtConfig: JwtConfig
+
+    private val log = LoggerFactory.getLogger(javaClass)
 
     fun validateJwt(authToken : String) : Boolean{
         val key = jwtConfig.key.toByteArray()
@@ -52,15 +58,16 @@ class JwtUtils {
         } catch (e:Exception) { println(e); return null}
     }
 
-    fun getReaderIDFromJwt(authToken : String) : Pair<Long?,String?>? {
-        val key = jwtConfig.key.toByteArray() // secret in application.properties
+    fun validateJwsZoneExp(jws:String, currentZone:String, ticketSecret:String) : Boolean {
         try {
-            val jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken)
-
-            val readerID = jws.body["sub"].toString().toLong()
-            val pwd = jws.body["credentials"].toString()
-
-            return Pair(readerID,pwd)
-        } catch (e:Exception) { println(e); return null}
+            val jwsDecoded = Jwts.parserBuilder().setSigningKey(ticketSecret).build().parseClaimsJws(jws)
+            //exp è controllato automaticamente e -in caso il token sia scaduto- fallisce senza dover far controlli
+            val zid = jwsDecoded.body["zid"].toString()
+            val validFrom = jwsDecoded.body["validFrom"].toString().toLong()
+            val now = System.currentTimeMillis()/1000;
+            if(validFrom < now || !zid.contains(currentZone))
+                return false
+            return true
+            } catch (e:Exception) { println(e); return false}
     }
 }

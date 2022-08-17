@@ -9,6 +9,10 @@ class QRCodeReaders (
     @Id
     @Column("id")
     var id : Long?,
-    @Column("pwd")
-    var pwd : String,
+    //self-generated to identify itself
+    @Column("jwt")
+    var jwt : String,
+    //zone to compare with tickets validity zones
+    @Column("zone")
+    var zone : String
 )

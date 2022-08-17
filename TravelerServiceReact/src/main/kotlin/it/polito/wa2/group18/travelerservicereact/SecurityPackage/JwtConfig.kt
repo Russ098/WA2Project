@@ -12,5 +12,7 @@ data class JwtConfig (
     @Value("\${application.jwt.headerName}")
     val headerName : String,
     @Value("\${application.jwt.prefix}")
-    val headerPrefix : String
+    val headerPrefix : String,
+    @Value("\${application.jwt.jwtTicketSecret}")
+    val ticketKey : String
 )

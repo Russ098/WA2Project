@@ -24,4 +24,5 @@ class TransitServiceApplication{
         initializer.setDatabasePopulator(ResourceDatabasePopulator(ClassPathResource("schema.sql")))
         return initializer
     }
+    //TODO add populator
 }

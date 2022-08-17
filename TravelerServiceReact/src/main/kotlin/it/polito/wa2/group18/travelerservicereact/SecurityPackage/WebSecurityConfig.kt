@@ -29,6 +29,7 @@ class WebSecurityConfig(
             .pathMatchers("/hello").hasAnyRole("CUSTOMER", "ADMIN")
             .pathMatchers("/my/**").hasAnyRole("CUSTOMER", "ADMIN")
             .pathMatchers("/admin/**").hasAnyRole("ADMIN")
+            .pathMatchers("/secret").permitAll()
             .and()
             .addFilterBefore(JwtTokenFilter(jwtConfig, jwtUtils), SecurityWebFiltersOrder.HTTP_BASIC).build()
     }

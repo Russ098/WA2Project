@@ -32,5 +32,7 @@ class TravelerRouter {
                     .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getTicketsByUserID)
                 .andRoute(GET("/admin/traveler/{userID}/profile")
                     .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getProfileByUserID)
+                .andRoute(GET("/secret")
+                    .and(accept(MediaType.APPLICATION_JSON)),travelerHandler::getSecret)
     }
 }

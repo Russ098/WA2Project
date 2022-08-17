@@ -5,5 +5,4 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Mono
 
 interface QRCodeReaderRepository : ReactiveCrudRepository<QRCodeReaders, Long?> {
-    fun existsByIdAndPwdEquals(id: Long?, pwd: String?) : Mono<Boolean>
 }
