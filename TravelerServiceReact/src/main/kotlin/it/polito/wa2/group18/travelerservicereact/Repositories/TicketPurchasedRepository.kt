@@ -17,4 +17,5 @@ interface TicketPurchasedRepository : ReactiveCrudRepository<TicketPurchased, St
 
     fun getByJws(jws: String?) : Mono<TicketPurchasedDTO>
 
+    fun existsById (ticketID: Long?) : Mono<Boolean>
 }

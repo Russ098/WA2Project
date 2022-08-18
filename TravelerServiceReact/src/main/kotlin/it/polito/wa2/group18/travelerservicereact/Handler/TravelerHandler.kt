@@ -1,5 +1,9 @@
 package it.polito.wa2.group18.travelerservicereact.Handler
 
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.client.j2se.MatrixToImageWriter
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.qrcode.QRCodeWriter
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import it.polito.wa2.group18.travelerservicereact.DTOs.TicketPurchasedDTO
@@ -25,7 +29,9 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import java.io.ByteArrayOutputStream
 import java.security.Key
+import java.util.*
 
 @Component
 class TravelerHandler {
@@ -162,5 +168,30 @@ class TravelerHandler {
     fun getSecret(request : ServerRequest) : Mono<ServerResponse>
     {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(jwtConfig.ticketKey))
+    }
+
+    fun getQRCode(request: ServerRequest): Mono<ServerResponse> {
+        val ticketID: Long = request.pathVariable("ticketID").toLong()
+        return ticketRepo.existsById(ticketID).flatMap { exists ->
+            println("EXISTS: "+exists)
+            if(!exists)
+                ServerResponse.notFound().build()
+            else
+            {
+                ticketRepo.getBySub(ticketID).flatMap { ticket ->
+                    println("RECEIVED: "+ticket)
+                    ServerResponse.ok().body(BodyInserters.fromValue(QRCodeEncoding(ticket!!.jws!!)))
+                }.onErrorResume { println(it); ServerResponse.badRequest().build() }
+            }
+        }
+    }
+
+    fun QRCodeEncoding(jws: String): String{
+        val qrCodeWriter = QRCodeWriter()
+        val bitMatrix: BitMatrix = qrCodeWriter.encode(jws, BarcodeFormat.QR_CODE, 500, 500)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream)
+        val res = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray())
+        return res
     }
 }

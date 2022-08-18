@@ -123,6 +123,21 @@ class TravelerLogic : TravelerLayer {
         return byteArrayOutputStream.toByteArray()
     }
 
+    fun QRCodeEncoding2(jws: String): String{//Resource {
+//        val imageOut = ByteArrayOutputStream()
+//        QRCode(jws).render().writeImage(imageOut)
+//        val imageBytes = imageOut.toByteArray()
+//        val resource = ByteArrayResource(imageBytes, IMAGE_PNG_VALUE)
+//        return resource.byteArray
+        val qrCodeWriter = QRCodeWriter()
+        val bitMatrix: BitMatrix = qrCodeWriter.encode(jws, BarcodeFormat.QR_CODE, 500, 500)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream)
+        val res = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray())
+        println(res)
+        return res
+    }
+
     fun getTicketExpiration (d:Date) : Date
     {
         return Date(d.time+jwtTicketConfig.expirationOffset)

@@ -27,6 +27,7 @@ class WebSecurityConfig(
             .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // see Comment below
             .authorizeExchange()
             .pathMatchers("/hello").hasAnyRole("CUSTOMER", "ADMIN")
+            .pathMatchers("/my/qrcode/**").permitAll()
             .pathMatchers("/my/**").hasAnyRole("CUSTOMER", "ADMIN")
             .pathMatchers("/admin/**").hasAnyRole("ADMIN")
             .pathMatchers("/secret").permitAll()
