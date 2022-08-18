@@ -30,7 +30,7 @@ class WebSecurityConfig(
             .pathMatchers("/my/qrcode/**").permitAll()
             .pathMatchers("/my/**").hasAnyRole("CUSTOMER", "ADMIN")
             .pathMatchers("/admin/**").hasAnyRole("ADMIN")
-            .pathMatchers("/secret").permitAll()
+            .pathMatchers("/secret").hasAnyRole("DEVICE")
             .and()
             .addFilterBefore(JwtTokenFilter(jwtConfig, jwtUtils), SecurityWebFiltersOrder.HTTP_BASIC).build()
     }

@@ -9,7 +9,8 @@ import org.springframework.data.relational.core.mapping.Table
 
 enum class Role {
     CUSTOMER,
-    ADMIN
+    ADMIN,
+    DEVICE
 }
 
 @Table("userDetails")

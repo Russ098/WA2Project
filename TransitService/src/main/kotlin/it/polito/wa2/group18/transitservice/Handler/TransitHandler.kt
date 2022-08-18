@@ -69,30 +69,38 @@ class TransitHandler {
     }*/
 
     fun validateTicket(request: ServerRequest) : Mono<ServerResponse> {
-        println("EnterValidate")
-        //TODO: formare la richiesta in questo modo {"qrCode":"...", "readerId":"..."}
         return request.bodyToMono<ValidateTicketRequest>().flatMap { request ->
-            println(request)
             val decodedQRCode = Base64.getDecoder().decode(request.qrcode)
-            val jwsOuter = decodeQRCode(decodedQRCode)
-            println("JWS: "+jwsOuter)
-            qrCodeReadersRepo.getById(request.readerID).flatMap { reader ->
-                println("READER "+reader.zone)
-                val webClient = WebClient.create("http://localhost:8082")
-                webClient.get()
-                    .uri("/secret")
-                    //TODO introdurre header con token di riconoscimento
-                    //.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    .retrieve()
-                    .bodyToMono(String::class.java).flatMap { ticketSecret ->
-                        val jws=decodeQRCode(decodedQRCode)
-                        println("JWS: "+jws)
-                        val test = jwtUtils.validateJwsZoneExp(jws, reader.zone, ticketSecret)
-                        if(test)
-                            ServerResponse.ok().build()
-                        else
-                            ServerResponse.badRequest().build()
+            val jws = decodeQRCode(decodedQRCode)
+            qrCodeReadersRepo.existsById(request.readerID).flatMap { readerExists ->
+                if(!readerExists)
+                {
+                    println("Reader doesn't exist")
+                    ServerResponse.notFound().build()
+                }
+                else
+                {
+                    qrCodeReadersRepo.getById(request.readerID).flatMap { reader ->
+                        val webClient = WebClient.create("http://localhost:8082")
+                        webClient.get()
+                            .uri("/secret")
+                            .header("Authorization", "Bearer "+reader.jwt)
+                            .retrieve()
+                            .bodyToMono(String::class.java).flatMap { ticketSecret ->
+                                val test = jwtUtils.validateJwsZoneExp(jws, reader.zone, ticketSecret)
+                                if(test) {
+                                    //TODO confrontare uso biglietti singoli
+                                    println("Ticket is valid")
+                                    //TODO aggiungere un transito se va bene
+                                    ServerResponse.ok().build()
+                                }
+                                else {
+                                    println("Ticket is NOT valid")
+                                    ServerResponse.badRequest().build()
+                                }
+                            }.onErrorResume { println(it); ServerResponse.notFound().build() }
                     }.onErrorResume { println(it); ServerResponse.notFound().build() }
+                }
             }.onErrorResume { println(it); ServerResponse.notFound().build() }
         }.onErrorResume { println(it); ServerResponse.notFound().build() }
     }

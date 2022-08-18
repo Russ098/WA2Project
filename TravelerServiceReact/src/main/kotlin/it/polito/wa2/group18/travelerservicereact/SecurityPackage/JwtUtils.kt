@@ -37,7 +37,6 @@ class JwtUtils {
         val key = jwtConfig.key.toByteArray() // secret in application.properties
         try {
             val jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken)
-
             val roles = jws.body["roles"].toString()
             val rolesList = roles.split(",")
             val rolesEnum: MutableList<Role> = mutableListOf()

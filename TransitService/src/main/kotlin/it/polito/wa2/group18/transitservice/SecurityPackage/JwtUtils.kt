@@ -52,9 +52,7 @@ class JwtUtils {
         val key = jwtConfig.key.toByteArray() // secret in application.properties
         try {
             val jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken)
-
             val userId = jws.body["sub"].toString().toLong()
-
             return userId
         } catch (e:Exception) { println(e); return null}
     }
@@ -67,10 +65,16 @@ class JwtUtils {
             val zid = jwsDecoded.body["zid"].toString()
             val validFrom = jwsDecoded.body["validFrom"].toString().toLong()
             val now = System.currentTimeMillis()/1000;
-            println("VALID FROM: "+validFrom + " vs NOW: "+now)
-            println("ZONE:"+zid+" vs CURRENT:"+currentZone)
-            if(validFrom < now || !zid.contains(currentZone))
+            if(now < validFrom )
+            {
+                println("jwt not valid yet")
                 return false
+            }
+            else if (!zid.contains(currentZone))
+            {
+                println("wrong zone")
+                return false
+            }
             return true
             } catch (e:Exception) { println(e); return false}
     }

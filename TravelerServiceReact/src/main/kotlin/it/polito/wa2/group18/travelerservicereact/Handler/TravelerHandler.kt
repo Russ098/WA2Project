@@ -173,13 +173,11 @@ class TravelerHandler {
     fun getQRCode(request: ServerRequest): Mono<ServerResponse> {
         val ticketID: Long = request.pathVariable("ticketID").toLong()
         return ticketRepo.existsById(ticketID).flatMap { exists ->
-            println("EXISTS: "+exists)
             if(!exists)
                 ServerResponse.notFound().build()
             else
             {
                 ticketRepo.getBySub(ticketID).flatMap { ticket ->
-                    println("RECEIVED: "+ticket)
                     ServerResponse.ok().body(BodyInserters.fromValue(QRCodeEncoding(ticket!!.jws!!)))
                 }.onErrorResume { println(it); ServerResponse.badRequest().build() }
             }

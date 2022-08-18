@@ -28,7 +28,6 @@ class JwtTokenFilter(val jwtConfig: JwtConfig, val jwtUtils : JwtUtils) : WebFil
         }
 
         val userDetailsJwt = jwtUtils.getDetailsJwtFilter(jwt)
-
         val authentication = UsernamePasswordAuthenticationToken(
             userDetailsJwt?.username,
             null,
