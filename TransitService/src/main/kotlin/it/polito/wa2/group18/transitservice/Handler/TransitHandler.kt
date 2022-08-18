@@ -87,11 +87,9 @@ class TransitHandler {
                             .header("Authorization", "Bearer "+reader.jwt)
                             .retrieve()
                             .bodyToMono(String::class.java).flatMap { ticketSecret ->
-                                val test = jwtUtils.validateJwsZoneExp(jws, reader.zone, ticketSecret)
+                                val test = jwtUtils.validateJwsZoneExp(jws, request.readerID, reader.zone, ticketSecret)
                                 if(test) {
-                                    //TODO confrontare uso biglietti singoli
                                     println("Ticket is valid")
-                                    //TODO aggiungere un transito se va bene
                                     ServerResponse.ok().build()
                                 }
                                 else {

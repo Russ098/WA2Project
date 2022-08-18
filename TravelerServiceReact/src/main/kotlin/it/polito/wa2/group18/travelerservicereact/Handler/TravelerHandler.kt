@@ -101,6 +101,7 @@ class TravelerHandler {
             .onErrorResume { println(it); ServerResponse.badRequest().build() }
     }
 
+    //IMPORTANTE: validFrom va espresso in SECONDI, non millisecondi
     fun buyTickets(request: ServerRequest): Mono<ServerResponse> {
         val jwt = request.headers().firstHeader(jwtConfig.headerName)!!.split(" ")[1]
         val result: MutableList<TicketPurchasedDTO> = mutableListOf()
