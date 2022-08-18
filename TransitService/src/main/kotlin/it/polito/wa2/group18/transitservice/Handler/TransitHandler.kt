@@ -4,6 +4,7 @@ import com.google.zxing.BinaryBitmap
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
+import it.polito.wa2.group18.transitservice.DTOs.ValidateTicketRequest
 import it.polito.wa2.group18.transitservice.Kafka.LogController
 import it.polito.wa2.group18.transitservice.Repositories.QRCodeReaderRepository
 import it.polito.wa2.group18.transitservice.Repositories.TransitRepository
@@ -70,22 +71,30 @@ class TransitHandler {
     fun validateTicket(request: ServerRequest) : Mono<ServerResponse> {
         println("EnterValidate")
         //TODO: formare la richiesta in questo modo {"qrCode":"...", "readerId":"..."}
-        return request.bodyToMono<ByteArray>().flatMap { QRCode ->
-            val webClient = WebClient.create("http://localhost:8082")
-            return@flatMap webClient.get()
-                .uri("/secret")
-                //TODO introdurre header con token di riconoscimento
-                //.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .retrieve()
-                .bodyToMono(String::class.java).flatMap { ticketSecret ->
-                    var jws=decodeQRCode(QRCode)
-                    val test = jwtUtils.validateJwsZoneExp(jws, "A", ticketSecret)
-                    if(test)
-                        return@flatMap ServerResponse.ok().build()
-                    else
-                        return@flatMap ServerResponse.badRequest().build()
-                }
-        }
+        return request.bodyToMono<ValidateTicketRequest>().flatMap { request ->
+            println(request)
+            val decodedQRCode = Base64.getDecoder().decode(request.qrcode)
+            val jwsOuter = decodeQRCode(decodedQRCode)
+            println("JWS: "+jwsOuter)
+            qrCodeReadersRepo.getById(request.readerID).flatMap { reader ->
+                println("READER "+reader.zone)
+                val webClient = WebClient.create("http://localhost:8082")
+                webClient.get()
+                    .uri("/secret")
+                    //TODO introdurre header con token di riconoscimento
+                    //.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                    .retrieve()
+                    .bodyToMono(String::class.java).flatMap { ticketSecret ->
+                        val jws=decodeQRCode(decodedQRCode)
+                        println("JWS: "+jws)
+                        val test = jwtUtils.validateJwsZoneExp(jws, reader.zone, ticketSecret)
+                        if(test)
+                            ServerResponse.ok().build()
+                        else
+                            ServerResponse.badRequest().build()
+                    }.onErrorResume { println(it); ServerResponse.notFound().build() }
+            }.onErrorResume { println(it); ServerResponse.notFound().build() }
+        }.onErrorResume { println(it); ServerResponse.notFound().build() }
     }
     // FUN X CONTROLLO READER DAL JWT CHECK READERID E PASSWORD
 }

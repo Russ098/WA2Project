@@ -11,7 +11,7 @@ class QRCodeReaders (
     var id : Long?,
     //self-generated to identify itself
     @Column("jwt")
-    var jwt : String,
+    var jwt : String?,
     //zone to compare with tickets validity zones
     @Column("zone")
     var zone : String

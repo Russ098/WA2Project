@@ -9,6 +9,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.stereotype.Component
 import java.sql.Timestamp
 import java.time.Instant
+import java.util.*
 
 @Component
 class JwtUtils {
@@ -60,11 +61,14 @@ class JwtUtils {
 
     fun validateJwsZoneExp(jws:String, currentZone:String, ticketSecret:String) : Boolean {
         try {
-            val jwsDecoded = Jwts.parserBuilder().setSigningKey(ticketSecret).build().parseClaimsJws(jws)
+            val key = ticketSecret.toByteArray()
+            val jwsDecoded = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jws)
             //exp è controllato automaticamente e -in caso il token sia scaduto- fallisce senza dover far controlli
             val zid = jwsDecoded.body["zid"].toString()
             val validFrom = jwsDecoded.body["validFrom"].toString().toLong()
             val now = System.currentTimeMillis()/1000;
+            println("VALID FROM: "+validFrom + " vs NOW: "+now)
+            println("ZONE:"+zid+" vs CURRENT:"+currentZone)
             if(validFrom < now || !zid.contains(currentZone))
                 return false
             return true
