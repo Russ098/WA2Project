@@ -84,7 +84,7 @@ class TransitHandler {
                         val webClient = WebClient.create("http://localhost:8082")
                         webClient.get()
                             .uri("/secret")
-                            .header("Authorization", "Bearer "+reader.jwt)
+                            .header("Authorization", "Bearer " + reader.jwt)
                             .retrieve()
                             .bodyToMono(String::class.java).flatMap { ticketSecret ->
                                 val test = jwtUtils.validateJwsZoneExp(jws, request.readerID, reader.zone, ticketSecret)

@@ -11,7 +11,7 @@ CREATE TABLE qrCodeReaders
 CREATE TABLE transits
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    timestamp DATE,
+    timestamp TIMESTAMP,
     UserID BIGINT,
     jws varchar (255),
     readerID BIGINT,

@@ -72,7 +72,7 @@ class JwtUtils {
             val zid = jwsDecoded.body["zid"].toString()
             val validFrom = jwsDecoded.body["validFrom"].toString().toLong()
             val now = System.currentTimeMillis()/1000;
-            if(now < validFrom )
+            if(now > validFrom )
             {
                 println("jwt not valid yet")
                 return false
@@ -94,7 +94,6 @@ class JwtUtils {
                     return false
                 }
             }
-            //TODO sistemare il timestamp per includere anche l'orario
             val newtransit = transitRepo.save(Transits(id=null, timestamp= Timestamp.from(Instant.now()), userId = jwsDecoded.body["sub"].toString().toLong(),jws=jws,readerID=readerID,valid = true)).toFuture().get()
             println(newtransit.toString())
             return true
