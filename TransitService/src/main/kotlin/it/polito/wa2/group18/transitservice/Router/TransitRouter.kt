@@ -18,6 +18,8 @@ class TransitRouter {
                 .route(GET("/hello")
                         .and(accept(MediaType.APPLICATION_JSON)), transitHandler::hello)
                 .andRoute(POST("/readers/validate")
-                    .and(accept(MediaType.IMAGE_PNG)), transitHandler::validateTicket)
+                    .and(accept(MediaType.APPLICATION_JSON)), transitHandler::validateTicket)
+                .andRoute(POST("/admin/all/transits")
+                    .and(accept(MediaType.APPLICATION_JSON)), transitHandler::getAllTransits)
     }
 }

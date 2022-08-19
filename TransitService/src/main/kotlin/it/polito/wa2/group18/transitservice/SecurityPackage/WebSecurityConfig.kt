@@ -28,6 +28,7 @@ class WebSecurityConfig(
             .authorizeExchange()
             .pathMatchers("/hello").hasAnyRole("CUSTOMER", "ADMIN")
             .pathMatchers("/readers/validate").permitAll()
+            .pathMatchers("/admin/**").hasAnyRole("ADMIN")
             .and()
             .addFilterBefore(JwtTokenFilter(jwtConfig, jwtUtils), SecurityWebFiltersOrder.HTTP_BASIC).build()
     }

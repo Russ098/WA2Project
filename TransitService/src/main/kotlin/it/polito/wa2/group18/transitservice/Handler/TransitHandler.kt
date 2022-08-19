@@ -4,6 +4,7 @@ import com.google.zxing.BinaryBitmap
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
+import it.polito.wa2.group18.transitservice.DTOs.AllTransitsRequest
 import it.polito.wa2.group18.transitservice.DTOs.ValidateTicketRequest
 import it.polito.wa2.group18.transitservice.Kafka.LogController
 import it.polito.wa2.group18.transitservice.Repositories.QRCodeReaderRepository
@@ -23,6 +24,8 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
 import java.io.ByteArrayInputStream
+import java.sql.Timestamp
+import java.time.Instant
 import java.util.*
 import javax.imageio.ImageIO
 
@@ -103,4 +106,16 @@ class TransitHandler {
         }.onErrorResume { println(it); ServerResponse.notFound().build() }
     }
     // FUN X CONTROLLO READER DAL JWT CHECK READERID E PASSWORD
+
+    fun getAllTransits(request: ServerRequest): Mono<ServerResponse> {
+        return request.bodyToMono<AllTransitsRequest>().flatMap { request ->
+            transitRepo.getAllByTimestampBetween(Timestamp.from(Instant.ofEpochMilli(request.after)),
+                Timestamp.from(Instant.ofEpochMilli(request.before))
+            ).collectList()
+                .flatMap { transitsList ->
+                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(transitsList))
+                }
+                .onErrorResume { println(it); ServerResponse.badRequest().build() }
+        }
+    }
 }
