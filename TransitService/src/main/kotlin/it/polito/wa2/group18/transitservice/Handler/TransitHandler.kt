@@ -5,6 +5,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
 import it.polito.wa2.group18.transitservice.DTOs.AllTransitsRequest
+import it.polito.wa2.group18.transitservice.DTOs.UserTransitsRequest
 import it.polito.wa2.group18.transitservice.DTOs.ValidateTicketRequest
 import it.polito.wa2.group18.transitservice.Kafka.LogController
 import it.polito.wa2.group18.transitservice.Repositories.QRCodeReaderRepository
@@ -113,7 +114,17 @@ class TransitHandler {
                 Timestamp.from(Instant.ofEpochMilli(request.before))
             ).collectList()
                 .flatMap { transitsList ->
-                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(transitsList))
+                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(transitsList.size))
+                }
+                .onErrorResume { println(it); ServerResponse.badRequest().build() }
+        }
+    }
+    fun getUserTransits(request:ServerRequest):Mono<ServerResponse> {
+        return request.bodyToMono<UserTransitsRequest>().flatMap { request ->
+            transitRepo.countAllByTimestampBetweenAndUserId(Timestamp.from(Instant.ofEpochMilli(request.after)),
+                Timestamp.from(Instant.ofEpochMilli(request.before)),request.user)
+                .flatMap { transitsSize ->
+                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(transitsSize))
                 }
                 .onErrorResume { println(it); ServerResponse.badRequest().build() }
         }

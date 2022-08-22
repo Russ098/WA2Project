@@ -9,6 +9,6 @@ import java.sql.Timestamp
 
 interface TransitRepository : ReactiveCrudRepository<Transits, Long?> {
     fun existsByJws(jws:String) : Mono<Boolean>
-
     fun getAllByTimestampBetween(after: Timestamp, before: Timestamp) : Flux<TransitsDTO>
+    fun countAllByTimestampBetweenAndUserId(after: Timestamp,before: Timestamp,userId:Long) : Mono<Int>
 }

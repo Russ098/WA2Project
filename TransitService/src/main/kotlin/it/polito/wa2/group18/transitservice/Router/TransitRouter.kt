@@ -21,5 +21,7 @@ class TransitRouter {
                     .and(accept(MediaType.APPLICATION_JSON)), transitHandler::validateTicket)
                 .andRoute(POST("/admin/all/transits")
                     .and(accept(MediaType.APPLICATION_JSON)), transitHandler::getAllTransits)
+                .andRoute(POST("/admin/user/transits")
+                    .and(accept(MediaType.APPLICATION_JSON)), transitHandler::getUserTransits)
     }
 }
