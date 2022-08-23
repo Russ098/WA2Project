@@ -1,5 +1,6 @@
 package it.polito.wa2.group18.wa2lab3
 
+import it.polito.wa2.group18.wa2lab3.entities.Role
 import it.polito.wa2.group18.wa2lab3.entities.User
 import it.polito.wa2.group18.wa2lab3.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.web.server.ServerHttpSecurity.http
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @SpringBootApplication
@@ -29,24 +31,10 @@ class Wa2Lab3Application{
                 email= "admin@admin.com",
                 password = encodedPsw,
                 pending = false,
-                roles = "CUSTOMER,ADMIN"
+                roles = "CUSTOMER,ADMIN,SUPER_ADMIN"
             )
-
             userRepository.save(admin)
         }
-    }
-}
-@Configuration
-@EnableWebSecurity
-class KotlinSecurityConfiguration : WebSecurityConfigurerAdapter() {
-
-    override fun configure(http: HttpSecurity) {
-        http.
-            authorizeRequests()
-            .mvcMatchers("/**")
-            .permitAll()
-            .and()
-            .csrf().disable()
     }
 }
 

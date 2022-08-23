@@ -1,12 +1,10 @@
 package it.polito.wa2.group18.wa2lab3.services.userService
 
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import it.polito.wa2.group18.wa2lab3.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCrypt
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.security.Key
@@ -37,11 +35,6 @@ class LoginLogic : LoginLayer {
         }
 
         // e se la password coincide
-        /*val passEncoder = BCryptPasswordEncoder()
-        val encodedPsw = passEncoder.encode(password)
-
-        println("Encoded PSW: "+encodedPsw)*/
-
         if (!BCrypt.checkpw(password, userData.password)) {
             println("WRONG PASSWORD")
             return null

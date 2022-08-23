@@ -24,24 +24,24 @@ class EndPoints {
     lateinit var regService: RegistrationLayer
 
     @Autowired
-    lateinit var loginService : LoginLayer
+    lateinit var loginService: LoginLayer
 
     @GetMapping("/user/prova")
-    fun prova() : String {
+    fun prova(): String {
         return "Hello !!!"
     }
 
     @PostMapping("/user/register")
     fun registration(@RequestBody value: UserDTO): ResponseEntity<*>? {
         val dto = regService.registration(value)
-        return if(dto ==null)
+        return if (dto == null)
             ResponseEntity.status(400).body(null)
         else
             ResponseEntity.status(202).body("{ \"provisionalId\": \"${dto.id}\", \"email\": \"${dto.user?.email}\"}")
     }
 
     @PostMapping("/user/validate")
-    fun validation(@RequestBody params : ValidateParams): ResponseEntity<*> {
+    fun validation(@RequestBody params: ValidateParams): ResponseEntity<*> {
         try {
             val user = service.validation(params.provisional_id, params.activation_code)
             return if (user != null) {
@@ -49,15 +49,13 @@ class EndPoints {
             } else {
                 ResponseEntity.status(404).body(null)
             }
-        }
-        catch (e:Exception)
-        {
+        } catch (e: Exception) {
             return ResponseEntity.status(404).body(null)
         }
     }
 
     @PostMapping("/user/login")
-    fun login(@RequestBody params : LoginDataDTO): ResponseEntity<*> {
+    fun login(@RequestBody params: LoginDataDTO): ResponseEntity<*> {
         try {
             val jwt = loginService.login(params.username, params.password)
             return if (jwt != null) {
@@ -65,9 +63,17 @@ class EndPoints {
             } else {
                 ResponseEntity.status(404).body(null)
             }
+        } catch (e: Exception) {
+            return ResponseEntity.status(404).body(null)
         }
-        catch (e:Exception)
-        {
+    }
+
+    @PostMapping("/admin/register")
+    fun adminRegister(@RequestBody params: UserDTO): ResponseEntity<*> {
+        try {
+            val dto = regService.adminRegistration(params) ?: return ResponseEntity.status(400).body(null)
+            return ResponseEntity.status(202).body("{ \"username\": \"${dto.username}\", \"email\": \"${dto.email}\"}")
+        } catch (e: Exception) {
             return ResponseEntity.status(404).body(null)
         }
     }

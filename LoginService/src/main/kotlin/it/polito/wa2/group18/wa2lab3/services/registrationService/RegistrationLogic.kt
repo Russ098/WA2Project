@@ -86,4 +86,11 @@ class RegistrationLogic : RegistrationLayer {
         sender.send(message)
         println("Message sent to ${activation.user?.email}")
     }
+
+    override fun adminRegistration(adminData : UserDTO) : UserDTO? {
+        val passEncoder = BCryptPasswordEncoder()
+        val encodedPsw = passEncoder.encode(adminData.password)
+
+        return userRepo.save(User(username = adminData.username, email= adminData.email, password = encodedPsw, roles = Role.ADMIN.toString(), pending = false)).toDTO()
+    }
 }

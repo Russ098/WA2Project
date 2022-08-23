@@ -1,11 +1,11 @@
 package it.polito.wa2.group18.wa2lab3.entities
 
-import java.util.*
 import javax.persistence.*
 
 enum class Role{
     CUSTOMER,
-    ADMIN
+    ADMIN,
+    SUPER_ADMIN
 }
 
 @Entity

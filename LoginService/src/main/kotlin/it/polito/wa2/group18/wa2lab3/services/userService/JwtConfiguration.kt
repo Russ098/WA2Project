@@ -6,5 +6,9 @@ import org.springframework.stereotype.Component
 @Component
 data class JwtConfiguration(
     @Value("\${application.jwt.jwtSecret}")
-    val key : String = ""
+    val key: String = "",
+    @Value("\${application.jwt.headerName}")
+    val headerName: String,
+    @Value("\${application.jwt.prefix}")
+    val headerPrefix: String
 )

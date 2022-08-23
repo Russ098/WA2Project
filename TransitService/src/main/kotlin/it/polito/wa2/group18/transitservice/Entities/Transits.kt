@@ -1,6 +1,5 @@
 package it.polito.wa2.group18.transitservice.Entities
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
