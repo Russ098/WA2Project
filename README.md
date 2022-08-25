@@ -1,15 +1,20 @@
 # LOGIN SERVICE  (port 8081)
 - [/user/register](http://localhost:8081/user/register) :
     - **POST**
+        - body:`{"username":/*String*/,
+          "email": /*String*/,
+          "password":/*String*/}`
+        - description : This API is used to let the user register himself.
+- [/admin/register](http://localhost:8081/admin/register) :
+    - **POST**
+        - header : `{"Authorization": /*SUPER_ADMIN Bearer Token*/}` 
         - body:`{
           "username":/*String*/,
           "email": /*String*/,
-          "password":/*String*/
+          "password":/*String*/, 
+          "roles":/*String*/
           }`
-        - description : This API is used to let the user register himself.
-
-[//]: # (    RICONTROLLARE PER LA QUESTIONE RELATIVA ALL'AGGIORNAMENTO DI GOOGLE)
-
+        - description : This API is used to allow an _ADMIN_ with enrolling capabilities (a _SUPER_ADMIN_) to create a user with a given set of roles. In this case, no verification is required. 
 - [/user/validate](http://localhost:8081/user/validate) :
     - **POST**
         - body:`{
@@ -17,7 +22,6 @@
           "activation_code": /*String*/
           }`
         - description : This API is used to prove that the user is the owner of the provided e-mail.
-
 - [/user/login](http://localhost:8081/user/login) :
     - **POST**
         - body:`{
@@ -27,7 +31,19 @@
         - description : This API is used to authenticate the user.
 
 # TRAVELER SERVICE  (port 8082)
-... (TO DO)
+- [/my/profile](http://localhost:8082/my/profile) :
+    - **PUT**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - body : `{
+          "name": /*String*/,
+          "address": /*String*/,
+          "date_of_birth": /*Date*/,
+          "telephone_number": /*String*/
+          }`
+        - description : This API is used to allow a _CUSTOMER_ (or higher role) to insert his user details
+    - **GET**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to allow a _CUSTOMER_ (or higher role) to see his user details
 
 # TICKETCATALOGUE SERVICE  (port 8083)
 ... (TO DO)

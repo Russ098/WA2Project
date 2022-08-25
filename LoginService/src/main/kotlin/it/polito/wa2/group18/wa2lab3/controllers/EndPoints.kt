@@ -72,7 +72,8 @@ class EndPoints {
     fun adminRegister(@RequestBody params: UserDTO): ResponseEntity<*> {
         try {
             val dto = regService.adminRegistration(params) ?: return ResponseEntity.status(400).body(null)
-            return ResponseEntity.status(202).body("{ \"username\": \"${dto.username}\", \"email\": \"${dto.email}\"}")
+            //return ResponseEntity.status(202).body("{ \"username\": \"${dto.username}\", \"email\": \"${dto.email}\"}")
+            return ResponseEntity.status(202).body(dto)
         } catch (e: Exception) {
             return ResponseEntity.status(404).body(null)
         }

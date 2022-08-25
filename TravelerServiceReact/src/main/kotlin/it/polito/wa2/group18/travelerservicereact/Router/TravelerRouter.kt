@@ -22,6 +22,7 @@ class TravelerRouter {
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getProfile)
                 .andRoute(PUT("/my/profile")
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::saveProfile)
+                //TODO: proseguire nel readme
                 .andRoute(GET("/my/tickets")
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getTickets)
                 .andRoute(POST("/my/tickets")

@@ -1,8 +1,6 @@
 package it.polito.wa2.group18.wa2lab3.services.registrationService
 
-import it.polito.wa2.group18.wa2lab3.dtos.ActivationDTO
-import it.polito.wa2.group18.wa2lab3.dtos.UserDTO
-import it.polito.wa2.group18.wa2lab3.dtos.toDTO
+import it.polito.wa2.group18.wa2lab3.dtos.*
 import it.polito.wa2.group18.wa2lab3.entities.Activation
 import it.polito.wa2.group18.wa2lab3.entities.Role
 import it.polito.wa2.group18.wa2lab3.entities.User
@@ -87,10 +85,28 @@ class RegistrationLogic : RegistrationLayer {
         println("Message sent to ${activation.user?.email}")
     }
 
-    override fun adminRegistration(adminData : UserDTO) : UserDTO? {
+    override fun adminRegistration(adminData : UserDTO) : UserValidatedDTO? {
+        if(adminData.username=="" || adminData.password=="" || adminData.email=="" || adminData.roles=="") {
+            println("CHECKPOINT: Missing field")
+            return null
+        }
+        if(userRepo.existsByEmail(adminData.email) || userRepo.existsByUsername(adminData.username)) {
+            println("CHECKPOINT: ALREADY EXISTS")
+            return null
+        }
+        if(!strongPassword(adminData.password)) {
+            println("CHECKPOINT: WEAK PASSWORD")
+            return null
+        }
+        if(!validEmail(adminData.email))
+        {
+            println("CHECKPOINT: INVALID EMAIL")
+            return null
+        }
+
         val passEncoder = BCryptPasswordEncoder()
         val encodedPsw = passEncoder.encode(adminData.password)
 
-        return userRepo.save(User(username = adminData.username, email= adminData.email, password = encodedPsw, roles = adminData.roles, pending = false)).toDTO()
+        return userRepo.save(User(username = adminData.username, email= adminData.email, password = encodedPsw, roles = adminData.roles, pending = false)).toValidatedDTO()
     }
 }
