@@ -36,5 +36,9 @@ class TravelerRouter {
                     .and(accept(MediaType.APPLICATION_JSON)),travelerHandler::getSecret)
                 .andRoute(GET("/my/qrcode/{ticketID}")
                     .and(accept(MediaType.APPLICATION_JSON)),travelerHandler::getQRCode)
+                .andRoute(POST("/admin/getAllPurchases")
+                    .and(accept(MediaType.APPLICATION_JSON)),travelerHandler::getAllPurchases)
+                .andRoute(POST("/admin/getUserPurchases")
+                    .and(accept(MediaType.APPLICATION_JSON)),travelerHandler::getUserPurchases)
     }
 }

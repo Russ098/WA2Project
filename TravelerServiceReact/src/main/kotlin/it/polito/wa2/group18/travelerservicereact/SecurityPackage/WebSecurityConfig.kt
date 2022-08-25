@@ -26,10 +26,10 @@ class WebSecurityConfig(
             .and()
             .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // see Comment below
             .authorizeExchange()
-            .pathMatchers("/hello").hasAnyRole("CUSTOMER", "ADMIN")
+            .pathMatchers("/hello").hasAnyRole("CUSTOMER", "ADMIN","SUPER_ADMIN")
             .pathMatchers("/my/qrcode/**").permitAll()
-            .pathMatchers("/my/**").hasAnyRole("CUSTOMER", "ADMIN")
-            .pathMatchers("/admin/**").hasAnyRole("ADMIN")
+            .pathMatchers("/my/**").hasAnyRole("CUSTOMER", "ADMIN","SUPER_ADMIN")
+            .pathMatchers("/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
             .pathMatchers("/secret").hasAnyRole("DEVICE")
             .and()
             .addFilterBefore(JwtTokenFilter(jwtConfig, jwtUtils), SecurityWebFiltersOrder.HTTP_BASIC).build()

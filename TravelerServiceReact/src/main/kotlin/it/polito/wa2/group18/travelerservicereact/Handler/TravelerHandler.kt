@@ -6,10 +6,7 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
-import it.polito.wa2.group18.travelerservicereact.DTOs.TicketPurchasedDTO
-import it.polito.wa2.group18.travelerservicereact.DTOs.TicketsRequested
-import it.polito.wa2.group18.travelerservicereact.DTOs.UserProfileDTO
-import it.polito.wa2.group18.travelerservicereact.DTOs.toDTO
+import it.polito.wa2.group18.travelerservicereact.DTOs.*
 import it.polito.wa2.group18.travelerservicereact.Entities.TicketPurchased
 import it.polito.wa2.group18.travelerservicereact.Entities.toEntity
 import it.polito.wa2.group18.travelerservicereact.Repositories.TicketPurchasedRepository
@@ -31,6 +28,8 @@ import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
 import java.io.ByteArrayOutputStream
 import java.security.Key
+import java.sql.Timestamp
+import java.time.Instant
 import java.util.*
 
 @Component
@@ -192,5 +191,33 @@ class TravelerHandler {
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream)
         val res = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray())
         return res
+    }
+
+    fun getAllPurchases(request: ServerRequest) : Mono<ServerResponse>
+    {
+        return request.bodyToMono<AllPurchasesRequest>().flatMap { request ->
+            println(Timestamp.from(Instant.ofEpochMilli(request.after)).toString()+" "+Timestamp.from(Instant.ofEpochMilli(request.before)))
+                ticketRepo.countAllByIatBetween(
+                Timestamp.from(Instant.ofEpochMilli(request.after)),
+                Timestamp.from(Instant.ofEpochMilli(request.before))
+            ).flatMap { purchases ->
+                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(purchases))
+            }
+            .onErrorResume { println(it); ServerResponse.badRequest().build() }
+        }
+    }
+    fun getUserPurchases(request: ServerRequest) : Mono<ServerResponse>
+    {
+        return request.bodyToMono<UserPurchasesRequest>().flatMap { request ->
+            println(Timestamp.from(Instant.ofEpochMilli(request.after)).toString()+" "+Timestamp.from(Instant.ofEpochMilli(request.before)))
+            ticketRepo.countAllByIatBetweenAndUserId(
+                Timestamp.from(Instant.ofEpochMilli(request.after)),
+                Timestamp.from(Instant.ofEpochMilli(request.before)),
+                request.userId
+            ).flatMap { purchases ->
+                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(purchases))
+            }
+                .onErrorResume { println(it); ServerResponse.badRequest().build() }
+        }
     }
 }
