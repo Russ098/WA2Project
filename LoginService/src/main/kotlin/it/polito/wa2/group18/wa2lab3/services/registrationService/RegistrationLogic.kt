@@ -91,6 +91,6 @@ class RegistrationLogic : RegistrationLayer {
         val passEncoder = BCryptPasswordEncoder()
         val encodedPsw = passEncoder.encode(adminData.password)
 
-        return userRepo.save(User(username = adminData.username, email= adminData.email, password = encodedPsw, roles = Role.ADMIN.toString(), pending = false)).toDTO()
+        return userRepo.save(User(username = adminData.username, email= adminData.email, password = encodedPsw, roles = adminData.roles, pending = false)).toDTO()
     }
 }
