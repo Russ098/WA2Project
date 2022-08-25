@@ -14,7 +14,7 @@ class MailService {
         sender.host = "smtp.gmail.com"
         sender.port = 587
         sender.username = "g18.wa2.poliTo2k22@gmail.com"
-        sender.password = "P4\$\$word"
+        sender.password = "xqjbkyhyirhiagaj"
 
         configureJavaMailProps(sender.javaMailProperties)
         return sender
