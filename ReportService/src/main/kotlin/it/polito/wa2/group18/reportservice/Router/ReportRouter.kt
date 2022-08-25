@@ -17,5 +17,17 @@ class ReportRouter {
         return RouterFunctions
             .route(GET("/hello")
                 .and(accept(MediaType.APPLICATION_JSON)), reportHandler::hello)
+            .andRoute(POST("/admin/getAllTransits")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getAllTransits)
+            .andRoute(POST("/admin/getUserTransits")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getUserTransits)
+            .andRoute(POST("/admin/getAllPurchases")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getAllPurchases)
+            .andRoute(POST("/admin/getUserPurchases")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getUserPurchases)
+            .andRoute(POST("/admin/getAllPurchasesAndTransits")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getAllPurchasesAndTransits)
+            .andRoute(POST("/admin/getUserPurchasesAndTransits")
+                .and(accept(MediaType.APPLICATION_JSON)),reportHandler::getUserPurchasesAndTransits)
     }
 }

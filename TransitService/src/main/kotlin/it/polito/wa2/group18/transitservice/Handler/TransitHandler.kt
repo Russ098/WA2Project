@@ -122,7 +122,7 @@ class TransitHandler {
     fun getUserTransits(request:ServerRequest):Mono<ServerResponse> {
         return request.bodyToMono<UserTransitsRequest>().flatMap { request ->
             transitRepo.countAllByTimestampBetweenAndUserId(Timestamp.from(Instant.ofEpochMilli(request.after)),
-                Timestamp.from(Instant.ofEpochMilli(request.before)),request.user)
+                Timestamp.from(Instant.ofEpochMilli(request.before)),request.userId)
                 .flatMap { transitsSize ->
                     ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(transitsSize))
                 }
