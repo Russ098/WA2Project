@@ -54,17 +54,19 @@ class TicketCatalogueRouter
          */
             .andRoute(POST("/shop")
                 .and(accept(MediaType.APPLICATION_JSON)), tch::buyTickets)
-            /*Body di POST /shop/{ticketId}
+            /*Body di POST /shop/
                  {
-                    "ticketId": 2,
+                    "ticketId": 1,
                     "ticketNumber": 3,
                     "card":{
-	                    "creditCardNumber": "somenumber",
-                        "expirationDate": "2012-04-23T18:25:43.511Z",
+                        "creditCardNumber": "somenumber",
+                        "expirationDate": "2024-01-23",
                         "cvv": "123",
                         "cardHolder": "CapsuleCorp"
-	                    }
-                   }
+                    }
+                }
+
+                P.S. : vengono ritenute valide solo le date con il formato yyyy-MM-dd
              */
     }
 }

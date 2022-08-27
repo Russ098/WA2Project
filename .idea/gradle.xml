@@ -25,6 +25,16 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ReportService" />
+        <option name="gradleJvm" value="corretto-11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ReportService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/TicketCatalogueService" />
         <option name="gradleJvm" value="corretto-11" />
         <option name="modules">
@@ -50,6 +60,16 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/TravelerService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TravelerServiceReact" />
+        <option name="gradleJvm" value="corretto-11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/TravelerServiceReact" />
           </set>
         </option>
       </GradleProjectSettings>

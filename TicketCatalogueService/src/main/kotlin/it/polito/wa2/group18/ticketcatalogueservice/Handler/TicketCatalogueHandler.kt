@@ -2,7 +2,6 @@ package it.polito.wa2.group18.ticketcatalogueservice.Handler
 
 import it.polito.wa2.group18.ticketcatalogueservice.DTO.UserProfileDTO
 import it.polito.wa2.group18.ticketcatalogueservice.Entities.AttemptedOrder
-import it.polito.wa2.group18.ticketcatalogueservice.Entities.STATUS
 import it.polito.wa2.group18.ticketcatalogueservice.Entities.TicketOrder
 import it.polito.wa2.group18.ticketcatalogueservice.Entities.TicketType
 import it.polito.wa2.group18.ticketcatalogueservice.Kafka.LogController
@@ -14,18 +13,18 @@ import it.polito.wa2.group18.ticketcatalogueservice.SecurityPackage.JwtUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.*
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.client.RestTemplate
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.switchIfEmpty
-import java.time.Duration
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.*
 
 @Component
@@ -126,7 +125,7 @@ class TicketCatalogueHandler {
     fun buyTickets(request: ServerRequest): Mono<ServerResponse> {
         val jwt = request.headers().firstHeader(jwtConfig.headerName)!!.split(" ")[1]
         val userId: Long? = jwtUtils.getUserIdFromJwt(jwt)
-        println(userId)
+        println("USERID: " + userId)
         return request.bodyToMono<AttemptedOrder>().flatMap {
                 // Check on tickets number > 0
                 if(it.ticketNumber <= 0){
@@ -141,16 +140,26 @@ class TicketCatalogueHandler {
                         {   println("bad age"); return@flatMap ServerResponse.badRequest().build()}
                     }
                     //salvare come pending
-                    ticketOrderRepo.save(TicketOrder(null, userId!!, it.ticketId, it.ticketNumber))
-                        .flatMap { order ->
-                            val totalPrice = order.ticketNumber * ticket.price
-                            val cardData = it.card
-                            println("totalPrice ${totalPrice}")
-                            val paymentRequest = PaymentRequest(totalPrice,cardData, order.id, userId, jwt)
-                            logController.post(paymentRequest)
 
-                            ServerResponse.ok().body(BodyInserters.fromValue("{ \"order_id\" : ${order.id} }"))
-                        }
+                    if(isValidDate(it.card.expirationDate) &&
+                           LocalDate.parse(it.card.expirationDate) >
+                            Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()){
+                        ticketOrderRepo.save(TicketOrder(null, userId!!, it.ticketId, it.ticketNumber))
+                                .flatMap { order ->
+                                    val totalPrice = order.ticketNumber * ticket.price
+                                    val cardData = it.card
+                                    println("totalPrice ${totalPrice}")
+                                    val paymentRequest = PaymentRequest(totalPrice,cardData, order.id, userId, jwt)
+                                    logController.post(paymentRequest)
+
+                                    ServerResponse.ok().body(BodyInserters.fromValue("{ \"order_id\" : ${order.id} }"))
+                                }
+                    }
+                    else{
+                        println("CHECKPOINT: Credit Card expired or invalid date format")
+                        ServerResponse.badRequest().build()
+                    }
+
                 }.switchIfEmpty {
                     println(it); ServerResponse.badRequest().build() }
             }
@@ -175,6 +184,19 @@ class TicketCatalogueHandler {
         }
         return null
     }
+
+    fun isValidDate(inDate: String?): Boolean {
+        if (inDate == null || !inDate.matches(Regex( "\\d{4}-[01]\\d-[0-3]\\d"))) return false
+        val df = SimpleDateFormat("yyyy-MM-dd")
+        df.isLenient = false
+        return try {
+            df.parse(inDate)
+            true
+        } catch (ex: ParseException) {
+            false
+        }
+    }
+
 }
 
 

@@ -46,7 +46,22 @@
         - description : This API is used to allow a _CUSTOMER_ (or higher role) to see his user details
 
 # TICKETCATALOGUE SERVICE  (port 8083)
-... (TO DO)
+
+- [/shop](http://localhost:8083/shop) :
+- **POST**
+  - header : `{"Authorization": /*CUSTOMER/ADMIN Bearer Token*/}`
+  - body : `{
+    "ticketId": /*Long*/,
+    "ticketNumber": /*Long*/,
+    "card":{
+    "creditCardNumber": /*String*/,
+    "expirationDate": /*String*/,
+    "cvv": /*String*/,
+    "cardHolder": /*String*/
+    }
+    }`
+  - description : This API is used to allow a _CUSTOMER_ (or an _ADMIN_) to perform a ticket purchase.
+
 
 # PAYMENT SERVICE  (port 8084)
 

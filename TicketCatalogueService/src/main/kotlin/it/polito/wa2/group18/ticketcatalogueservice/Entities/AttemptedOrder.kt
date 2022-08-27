@@ -10,8 +10,8 @@ class AttemptedOrder (
     )
 
 class PaymentInfo(
-    val creditCardNumber : String,
-    val expirationDate : Date,
-    val cvv : String,
-    val cardHolder : String
+    val creditCardNumber : String?,
+    val expirationDate : String?,
+    val cvv : String?,
+    val cardHolder : String?
 )

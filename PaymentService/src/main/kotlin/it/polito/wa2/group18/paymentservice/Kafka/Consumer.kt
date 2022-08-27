@@ -11,6 +11,7 @@ import org.springframework.kafka.core.KafkaTemplate
 
 import org.springframework.kafka.support.Acknowledgment
 import org.springframework.stereotype.Component
+import java.util.*
 
 
 @Component
@@ -35,11 +36,13 @@ class Consumer(
         val jwt = consumerRecord.value().userJwt
         paymentRepo.save(Payment(null, consumerRecord.value().userId!!)).subscribe()
 
-        if (Math.random() > 0.5) {// RANDOM GENRATOR
+
+        if (Math.random() > 0.5) {// RANDOM GENERATOR
             sendMessage(PaymentResponse(id, true, jwt))
         } else {
             sendMessage(PaymentResponse(id, false, jwt))
         }
+
         ack.acknowledge()
     }
 }

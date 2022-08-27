@@ -7,7 +7,7 @@ class PaymentInfo(
         @JsonProperty("creditCardNumber")
         val creditCardNumber : String?,
         @JsonProperty("expirationDate")
-        val expirationDate : Date?,
+        val expirationDate : String?,
         @JsonProperty("cvv")
         val cvv : String?,
         @JsonProperty("cardHolder")

@@ -103,6 +103,10 @@ class RegistrationLogic : RegistrationLayer {
             println("CHECKPOINT: INVALID EMAIL")
             return null
         }
+        if(!adminData.roles.contains("ADMIN")){
+            println("CHECKPOINT: NO ADMIN ROLE DETECTED")
+            return null
+        }
 
         val passEncoder = BCryptPasswordEncoder()
         val encodedPsw = passEncoder.encode(adminData.password)

@@ -4,7 +4,10 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/LoginService" />
     <file type="web" url="file://$PROJECT_DIR$/PaymentService" />
+    <file type="web" url="file://$PROJECT_DIR$/ReportService" />
     <file type="web" url="file://$PROJECT_DIR$/TicketCatalogueService" />
+    <file type="web" url="file://$PROJECT_DIR$/TransitService" />
+    <file type="web" url="file://$PROJECT_DIR$/TravelerServiceReact" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
