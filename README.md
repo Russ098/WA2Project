@@ -104,25 +104,38 @@
         - description : This API is used to obtain the Base64 encoding of the ticket _ticketID_
     
 # TICKETCATALOGUE SERVICE  (port 8083)
-
-- [/shop](http://localhost:8083/shop) :
-- **POST**
-  - header : `{"Authorization": /*CUSTOMER/ADMIN Bearer Token*/}`
-  - body : `{
-    "ticketId": /*Long*/,
-    "ticketNumber": /*Long*/,
-    "card":{
-    "creditCardNumber": /*String*/,
-    "expirationDate": /*String*/,
-    "cvv": /*String*/,
-    "cardHolder": /*String*/
-    }
-    }`
-  - description : This API is used to allow a _CUSTOMER_ (or an _ADMIN_) to perform a ticket purchase.
-
+- [/tickets](http://localhost:8083/tickets) :
+    - **GET**
+        - description : This API is used to retrieve all the types of ticket available.
+- [/admin/orders](http://localhost:8083/admin/orders) :
+    - **GET**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to allow an _ADMIN_ (or higher role) to see all performed orders.
+- [/orders](http://localhost:8083/orders) :
+  - **GET**
+    - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+    - description : This API is used to allow a _CUSTOMER_ (or higher role) to retrieve the list of his orders.
+- [/orders/{orderId}](http://localhost:8083/orders/{orderId}) :
+    - **GET**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to allow a _CUSTOMER_ (or higher role) to retrieve _orderId_'s info.
+- [/admin/orders/{userId}](http://localhost:8083/admin/orders/{userId}) :
+    - **GET**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to allow an _ADMIN_ (or higher role) to retrieve _userId_'s list of orders.
+- [/admin/tickets](http://localhost:8083/admin/tickets) :
+    - **POST**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+          - body: `{
+            "ticketType" : /*String*/,
+            "price": /*Float*/,
+            "ageBelow" : /*Long*/,
+            "duration": /*Long*/,
+            "zones": /*String*/
+            }`
+        - description : This API is used to allow an _ADMIN_ (or higher role) to create a new ticket type. _AgeBelow_ represents age limitations on a ticket (-1 means no restriction). _Duration_ represents the validity of the ticket in days since its activation.
 
 # PAYMENT SERVICE  (port 8084)
-
 - [/admin/transactions](http://localhost:8084/admin/transactions) :
     - **GET**
       - header : `{"Authorization": /*Admin Bearer Token*/}`

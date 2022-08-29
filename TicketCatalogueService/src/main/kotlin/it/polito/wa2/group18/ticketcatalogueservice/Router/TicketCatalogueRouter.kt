@@ -31,27 +31,8 @@ class TicketCatalogueRouter
                 .and(accept(MediaType.APPLICATION_JSON)), tch::getAdminOrder)
             .andRoute(POST("/admin/tickets")
                 .and(accept(MediaType.APPLICATION_JSON)), tch::addNewTicket)
-            /*Body di POST /admin/tickets
-                {
-                    "ticketType" : "nuovo_ticket",
-                    "price": 100.0,
-                    "ageBelow" : -1,
-                    "duration": 15,
-                    "zones": "ABC"
-                }
-             */
             .andRoute(PUT("/admin/tickets")
                 .and(accept(MediaType.APPLICATION_JSON)), tch::addNewTicket)
-            /*Body di PUT /admin/tickets
-            {
-                "id" : 1
-                "ticketType" : "nuovo_ticket",
-                "price": 100.0,
-                "ageBelow" : -1,
-                "duration": 15,
-                "zones": "ABC"
-            }
-         */
             .andRoute(POST("/shop")
                 .and(accept(MediaType.APPLICATION_JSON)), tch::buyTickets)
             /*Body di POST /shop/

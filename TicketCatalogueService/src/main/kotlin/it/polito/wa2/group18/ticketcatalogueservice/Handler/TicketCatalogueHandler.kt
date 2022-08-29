@@ -111,7 +111,7 @@ class TicketCatalogueHandler {
     }
 
     fun addNewTicket(request: ServerRequest): Mono<ServerResponse> {
-        return request.bodyToMono<TicketType>()
+        /*return request.bodyToMono<TicketType>()
             .flatMap {
                 Mono.just(ticketTypeRepo.save(it).subscribe())
             }
@@ -119,7 +119,25 @@ class TicketCatalogueHandler {
                 if (it != null) ServerResponse.ok().build()
                 else ServerResponse.badRequest().build()
             }
-            .onErrorResume {println(it); ServerResponse.badRequest().build() }
+            .onErrorResume {println(it); ServerResponse.badRequest().build() }*/
+        return request.bodyToMono<TicketType>()
+            .flatMap { newTicket ->
+                if(newTicket.id!=null) {
+                    println("TICKET ID NOT NULL")
+                    ticketTypeRepo.existsById(newTicket.id!!).flatMap { exists ->
+                        println("EXISTS: "+exists)
+                        if (exists) {
+                            ticketTypeRepo.save(newTicket).subscribe()
+                            ServerResponse.ok().build()
+                        } else
+                            ServerResponse.badRequest().build()
+                    }.onErrorResume { println(it); ServerResponse.badRequest().build() }
+                }
+                else {
+                    ticketTypeRepo.save(newTicket).subscribe()
+                    ServerResponse.ok().build()
+                }
+            }.onErrorResume {println(it); ServerResponse.badRequest().build() }
     }
 
     fun buyTickets(request: ServerRequest): Mono<ServerResponse> {
