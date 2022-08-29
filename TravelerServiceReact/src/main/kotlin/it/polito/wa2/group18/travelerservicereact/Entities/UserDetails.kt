@@ -2,6 +2,7 @@ package it.polito.wa2.group18.travelerservicereact.Entities
 
 
 import it.polito.wa2.group18.travelerservicereact.DTOs.UserDetailsDTO
+import it.polito.wa2.group18.travelerservicereact.DTOs.UserDetailsDTOResponse
 import org.springframework.data.annotation.Id
 import org.springframework.data.domain.Persistable
 import org.springframework.data.relational.core.mapping.Column
@@ -31,6 +32,14 @@ class UserDetails(
             rolesEnum.add(Role.valueOf(role))
         }
         return UserDetailsDTO(id, rolesEnum, username)
+    }
+    fun toResponseDTO():UserDetailsDTOResponse {
+        val rolesList = roles.split(",")
+        val rolesEnum: MutableList<Role> = mutableListOf()
+        rolesList.forEach { role ->
+            rolesEnum.add(Role.valueOf(role))
+        }
+        return UserDetailsDTOResponse(id, rolesEnum, username)
     }
 
     override fun getId(): Long? {

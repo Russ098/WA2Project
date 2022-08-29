@@ -39,7 +39,6 @@ class UserDetailsDTO(val id: Long?,
     override fun isEnabled(): Boolean {
         TODO("Not yet implemented")
     }
-
 }
 
 

@@ -143,7 +143,8 @@ class TravelerHandler {
     fun getTravelers(request: ServerRequest): Mono<ServerResponse> {
         return userDetailsRepo.findAll().collectList()
             .flatMap { usersDetailsList ->
-                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(usersDetailsList))
+                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(usersDetailsList.map { it.toResponseDTO() }))
             }
             .onErrorResume { println(it); ServerResponse.badRequest().build() }
     }
