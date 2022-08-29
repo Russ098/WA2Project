@@ -178,14 +178,65 @@
         "after" : /*Long*/,
         "before" : /*Long*/
         }`
-      - header : `{"Authorization": /*Admin Bearer Token*/}`
+      - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
       - description : This API is used to retrieve the total count of transits given an interval between 2 timestamps (defined as milliseconds since epoch).
 - [/admin/user/transits](http://localhost:8085/admin/user/transits) :
     - **POST**
         - body:`{
           "after": /*Long*/ ,
           "before":/*Long*/,
-          "user": /*Long*/}`
-        - header : `{"Authorization": /*Admin Bearer Token*/}`
+          "userId": /*Long*/}`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
         - description : This API is used to retrieve the count of transits for the specific user given an interval between 2 timestamps (defined as milliseconds since epoch).
 #REPORT SERVICE (port 8086)
+- [/admin/getAllTransits](http://localhost:8086/admin/getAllTransits) :
+    - **POST**
+        - body:`{
+          "after": /*Long*/ ,
+          "before":/*Long*/,
+      }`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve the total count of transits given an interval between 2 timestamps (defined as milliseconds since epoch).
+- [/admin/getUserTransits](http://localhost:8086/admin/getUserTransits) :
+    - **POST**
+        - body:`{
+          "after": /*Long*/ ,
+          "before":/*Long*/,
+          "userId":/*Long*/
+          }`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve a user's count of transits given an interval between 2 timestamps (defined as milliseconds since epoch).
+- [/admin/getAllPurchases](http://localhost:8086/admin/getAllPurchases) :
+  - **POST**
+      - body:`{
+        "after": /*Long*/ ,
+        "before":/*Long*/
+        }`
+      - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+      - description : This API is used to retrieve the total count of purchases given an interval between 2 timestamps (defined as milliseconds since epoch).
+- [/admin/getUserPurchases](http://localhost:8086/admin/getUserPurchases) :
+    - **POST**
+        - body:`{
+          "after": /*Long*/ ,
+          "before":/*Long*/,
+          "userId":/*Long*/
+          }`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve a user's count of purchases given an interval between 2 timestamps (defined as milliseconds since epoch).
+- [/admin/getAllPurchasesAndTransits](http://localhost:8086/admin/getAllPurchasesAndTransits) :
+    - **POST**
+        - body:`{
+          "after": /*Long*/ ,
+          "before":/*Long*/
+          }`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve the total count of purchases and transits given an interval between 2 timestamps (defined as milliseconds since epoch).
+- [/admin/getUserPurchasesAndTransits](http://localhost:8086/admin/getUserPurchasesAndTransits) :
+    - **POST**
+        - body:`{
+          "after": /*Long*/ ,
+          "before":/*Long*/,
+          "userId":/*Long*/
+          }`
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve a user's count of purchases and transits given an interval between 2 timestamps (defined as milliseconds since epoch).
