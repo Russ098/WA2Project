@@ -66,7 +66,7 @@ class TravelerHandler {
         return userProfileRepo.existsById(userId).flatMap { exists ->
             if (exists) {
                 userProfileRepo.getById(userId).flatMap {
-                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(it))
+                    ServerResponse.ok().body(BodyInserters.fromValue(it.toDTO()))
                 }
             } else
                 ServerResponse.notFound().build()
