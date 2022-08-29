@@ -44,6 +44,41 @@
     - **GET**
         - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
         - description : This API is used to allow a _CUSTOMER_ (or higher role) to see his user details
+- [/my/tickets](http://localhost:8082/my/tickets) :
+    - **POST**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - body : `{
+          "cmd" : "buy_tickets",
+          "quantity" : /*Long*/,
+          "ticket" : {
+          "zid" : /*String*/,
+          "exp" : /*Date*/,
+          "iat" : /*Date*/,
+          "validFrom" : /*Date*/,
+          "ticketType" : /*String*/
+          }
+          }`
+        - description : This API is used to add Tickets to the list of Purchased Tickets of a _CUSTOMER_ (or higher role)
+    - **GET**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used retrieve the list of tickets owned by a _CUSTOMER_ (or higher role)
+- [/admin/travelers](http://localhost:8082/admin/travelers) :
+  - **GET**
+    - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+    - description : This API is used to retrieve the complete list of UserDetails
+- [/admin/traveler/{userId}/tickets](http://localhost:8082/admin/traveler/{userId}/tickets) :
+    - **GET**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve the list of Tickets belonging to _userId_
+- [/admin/traveler/{userId}/tickets](http://localhost:8082/admin/traveler/{userId}/tickets) :
+    - **GET**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve the list of Tickets belonging to _userId_
+- [/admin/traveler/{userId}/profile](http://localhost:8082/admin/traveler/{userId}/profile) :
+    - **GET**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - description : This API is used to retrieve the profile of _userId_
+
 
 # TICKETCATALOGUE SERVICE  (port 8083)
 
