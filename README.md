@@ -126,15 +126,39 @@
 - [/admin/tickets](http://localhost:8083/admin/tickets) :
     - **POST**
         - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
-          - body: `{
-            "ticketType" : /*String*/,
-            "price": /*Float*/,
-            "ageBelow" : /*Long*/,
-            "duration": /*Long*/,
-            "zones": /*String*/
-            }`
+        - body: `{
+          "ticketType" : /*String*/,
+          "price": /*Float*/,
+          "ageBelow" : /*Long*/,
+          "duration": /*Long*/,
+          "zones": /*String*/
+          }`
         - description : This API is used to allow an _ADMIN_ (or higher role) to create a new ticket type. _AgeBelow_ represents age limitations on a ticket (-1 means no restriction). _Duration_ represents the validity of the ticket in days since its activation.
-
+  - **PUT**
+      - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+      - body: `{
+        "id":/*Long*/,
+        "ticketType" : /*String*/,
+        "price": /*Float*/,
+        "ageBelow" : /*Long*/,
+        "duration": /*Long*/,
+        "zones": /*String*/
+        }`
+      - description : This API is used to allow an _ADMIN_ (or higher role) to update an existing ticket type.
+- [/shop](http://localhost:8083/shop) :
+    - **POST**
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - body: `{
+          "ticketId": /*Long*/,
+          "ticketNumber": /*Long*/,
+          "card":{
+          "creditCardNumber": /*String*/,
+          "expirationDate": /*Date*/,
+          "cvv": /*String*/,
+          "cardHolder": /*String*/
+          }
+          }`
+        - description : This API is used to allow a _CUSTOMER_ (or higher role) to purchase _ticketNumber_ tickets of type _ticketId_, providing its credit card information to perform the payment. Credit card's expiration date format must be "YYYY-MM-DD"
 # PAYMENT SERVICE  (port 8084)
 - [/admin/transactions](http://localhost:8084/admin/transactions) :
     - **GET**
