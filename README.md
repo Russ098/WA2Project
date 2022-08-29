@@ -172,7 +172,6 @@
             "qrcode" : /*Base64*/,
             "readerID" : /*Long*/ }`
       - description : This API is used to validate the received QRCodes.
-
 - [/admin/all/transits](http://localhost:8085/admin/all/transits) :
   - **POST**
       - body:`{
@@ -181,7 +180,6 @@
         }`
       - header : `{"Authorization": /*Admin Bearer Token*/}`
       - description : This API is used to retrieve the total count of transits given an interval between 2 timestamps (defined as milliseconds since epoch).
-
 - [/admin/user/transits](http://localhost:8085/admin/user/transits) :
     - **POST**
         - body:`{
@@ -190,4 +188,4 @@
           "user": /*Long*/}`
         - header : `{"Authorization": /*Admin Bearer Token*/}`
         - description : This API is used to retrieve the count of transits for the specific user given an interval between 2 timestamps (defined as milliseconds since epoch).
-
+#REPORT SERVICE (port 8086)
