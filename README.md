@@ -99,7 +99,7 @@
     - **GET**
         - description : This API is used to obtain the Base64 encoding of the ticket _ticketID_
     
-#TICKETCATALOGUE SERVICE  (port 8083)
+# TICKETCATALOGUE SERVICE  (port 8083)
 - [/tickets](http://localhost:8083/tickets) :
     - **GET**
         - description : This API is used to retrieve all the types of ticket available.
