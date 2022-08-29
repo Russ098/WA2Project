@@ -78,8 +78,31 @@
     - **GET**
         - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
         - description : This API is used to retrieve the profile of _userId_
-
-
+- [/secret](http://localhost:8082/secret) :
+    - **GET**
+        - header : `{"Authorization": /*DEVICE Bearer Token*/}`
+        - description : This API is used to allow a device to obtain the secret to verify the validity of tickets' jwts
+- [/admin/getUserPurchases](http://localhost:8082/admin/getUserPurchases) :
+    - **POST**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - body:`{
+          "before": /*Long*/,
+          "after": /*Long*/,
+          "userId": /*Long*/
+        }`
+        - description : This API is used to count the tickets bought by a user in an interval of dates expressed as milliseconds since the Unix Epoch
+- [/admin/getAllPurchases](http://localhost:8082/admin/getAllPurchases) :
+    - **POST**
+        - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
+        - body:`{
+          "before": /*Long*/,
+          "after": /*Long*/
+          }`
+        - description : This API is used to count the tickets bought by all users in an interval of dates expressed as milliseconds since the Unix Epoch
+- [/my/qrcode/{ticketID}](http://localhost:8082/my/qrcode/{ticketID}) :
+    - **GET**
+        - description : This API is used to obtain the Base64 encoding of the ticket _ticketID_
+    
 # TICKETCATALOGUE SERVICE  (port 8083)
 
 - [/shop](http://localhost:8083/shop) :
