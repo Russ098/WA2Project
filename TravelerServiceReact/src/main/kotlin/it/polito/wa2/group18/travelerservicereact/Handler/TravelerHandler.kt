@@ -163,10 +163,8 @@ class TravelerHandler {
         val userID: Long = request.pathVariable("userID").toLong()
         return userProfileRepo.getById(userID)
             .flatMap { userProfile ->
-                println("USER:"+userProfile.toDTO().toString())
                 ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(userProfile.toDTO()))
             }.switchIfEmpty {
-                println("EMPTY")
                 ServerResponse.notFound().build()
             }
             .onErrorResume { println(it); ServerResponse.badRequest().build() }
