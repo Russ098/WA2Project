@@ -26,6 +26,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 import java.io.ByteArrayOutputStream
 import java.security.Key
 import java.sql.Timestamp
@@ -162,7 +163,11 @@ class TravelerHandler {
         val userID: Long = request.pathVariable("userID").toLong()
         return userProfileRepo.getById(userID)
             .flatMap { userProfile ->
-                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(userProfile))
+                println("USER:"+userProfile.toDTO().toString())
+                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(userProfile.toDTO()))
+            }.switchIfEmpty {
+                println("EMPTY")
+                ServerResponse.notFound().build()
             }
             .onErrorResume { println(it); ServerResponse.badRequest().build() }
     }
