@@ -76,17 +76,18 @@ class TravelerHandler {
 
     fun saveProfile(request: ServerRequest): Mono<ServerResponse> {
         val jwt = request.headers().firstHeader(jwtConfig.headerName)!!.split(" ")[1]
-
         return request.bodyToMono<UserProfileDTO>().flatMap { profile ->
-            return@flatMap jwtUtils.getDetailsJwt(jwt).doOnSuccess {
-                profile.id = it?.id
-                userProfileRepo.save(profile.toEntity()).subscribe()
-            }.flatMap {
-                if (it != null) ServerResponse.ok().build()
-                else ServerResponse.badRequest().build()
-            }
-                .onErrorResume { println(it); ServerResponse.badRequest().build() }
-        }
+            jwtUtils.getDetailsJwt(jwt).flatMap { jwtData ->
+                userProfileRepo.existsById(jwtData!!.id).flatMap { exists ->
+                    if (exists)
+                        profile.id=jwtData!!.id
+                    else
+                        profile.id=null;
+                    userProfileRepo.save(profile.toEntity()).subscribe()
+                    ServerResponse.ok().build()
+                }.onErrorResume { ServerResponse.badRequest().build() }
+            }.onErrorResume { ServerResponse.badRequest().build() }
+        }.onErrorResume { ServerResponse.badRequest().build() }
     }
 
     fun getTickets(request: ServerRequest): Mono<ServerResponse> {

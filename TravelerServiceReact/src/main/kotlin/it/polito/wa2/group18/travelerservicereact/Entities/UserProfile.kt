@@ -26,7 +26,7 @@ data class UserProfile (
     }
 
     override fun isNew(): Boolean {
-        return true
+        return id==null
     }
 }
 
