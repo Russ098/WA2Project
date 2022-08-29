@@ -27,8 +27,8 @@ class WebSecurityConfig(
             .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // see Comment below
             .authorizeExchange()
             .pathMatchers("/hello").permitAll()
-            .pathMatchers("/admin/**").hasRole("ADMIN")
-            .pathMatchers("/transactions").hasRole("CUSTOMER")
+            .pathMatchers("/admin/**").hasAnyRole("ADMIN","SUPER_ADMIN")
+            .pathMatchers("/transactions").hasAnyRole("CUSTOMER","ADMIN","SUPER_ADMIN")
             .and()
             .addFilterBefore(JwtTokenFilter(jwtConfig, jwtUtils), SecurityWebFiltersOrder.HTTP_BASIC).build()
     }

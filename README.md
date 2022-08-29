@@ -99,7 +99,7 @@
     - **GET**
         - description : This API is used to obtain the Base64 encoding of the ticket _ticketID_
     
-# TICKETCATALOGUE SERVICE  (port 8083)
+#TICKETCATALOGUE SERVICE  (port 8083)
 - [/tickets](http://localhost:8083/tickets) :
     - **GET**
         - description : This API is used to retrieve all the types of ticket available.
@@ -158,15 +158,13 @@
 # PAYMENT SERVICE  (port 8084)
 - [/admin/transactions](http://localhost:8084/admin/transactions) :
     - **GET**
-      - header : `{"Authorization": /*Admin Bearer Token*/}`
+      - header : `{"Authorization": /*ADMIN/SUPER_ADMIN Bearer Token*/}`
       - description : This API is used to list all transactions.
 
 - [/transactions](http://localhost:8084/transactions) :
     - **GET**
-        - header : `{"Authorization": /*Customer Bearer Token*/}`
+        - header : `{"Authorization": /*CUSTOMER/ADMIN/SUPER_ADMIN Bearer Token*/}`
         - description : This API is used to list all transactions performed by the customer.
-
-
 # TRANSIT SERVICE  (port 8085)
 - [/readers/validate](http://localhost:8085/readers/validate) :
    - **POST**
