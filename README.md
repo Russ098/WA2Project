@@ -5,6 +5,8 @@
           "email": /*String*/,
           "password":/*String*/}`
         - description : This API is used to let the user register himself.
+        - return value(s):  `{"provisionalId":/*String*/,
+          "email": /*String*/}`
 - [/admin/register](http://localhost:8081/admin/register) :
     - **POST**
         - header : `{"Authorization": /*SUPER_ADMIN Bearer Token*/}` 
@@ -22,6 +24,8 @@
           "activation_code": /*String*/
           }`
         - description : This API is used to prove that the user is the owner of the provided e-mail.
+      - return value(s):  `{"id":/*Long*/,
+        "username": /*String*/, "email":/*String*/}`
 - [/user/login](http://localhost:8081/user/login) :
     - **POST**
         - body:`{
@@ -29,6 +33,7 @@
           "password": /*String*/
           }`
         - description : This API is used to authenticate the user.
+        - return value(s):  `jwt : /*String*/`
 
 # TRAVELER SERVICE  (port 8082)
 - [/my/profile](http://localhost:8082/my/profile) :
