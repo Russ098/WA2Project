@@ -16,9 +16,7 @@ class TravelerRouter {
     @Bean
     fun route(travelerHandler: TravelerHandler) : RouterFunction<ServerResponse>{
         return RouterFunctions
-                .route(GET("/hello")
-                        .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::hello)
-                .andRoute(GET("/my/profile")
+                .route(GET("/my/profile")
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::getProfile)
                 .andRoute(PUT("/my/profile")
                         .and(accept(MediaType.APPLICATION_JSON)), travelerHandler::saveProfile)

@@ -56,11 +56,6 @@ class TravelerHandler {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    fun hello(req: ServerRequest): Mono<ServerResponse> {
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromValue("{\"${SecurityContextHolder.getContext().authentication.principal}\"}"))
-    }
-
     fun getProfile(request: ServerRequest): Mono<ServerResponse> {
         val jwt = request.headers().firstHeader(jwtConfig.headerName)!!.split(" ")[1]
         val userId: Long? = jwtUtils.getUserIdFromJwt(jwt)
@@ -109,33 +104,35 @@ class TravelerHandler {
 
         return request.bodyToMono<TicketsRequested>().flatMap { params ->
             if (params.cmd != "buy_tickets" || params.quantity <= 0) {
-                ServerResponse.badRequest()
+                ServerResponse.badRequest().build()
             }
-            return@flatMap jwtUtils.getDetailsJwt(jwt).flatMap { userDetails ->
-                for (i in 1..params.quantity) {
-                    val newTicket = TicketPurchased(
-                        zid = params.ticket.zid, exp = params.ticket.exp, iat = params.ticket.iat,
-                        validFrom = params.ticket.validFrom, ticketType = params.ticket.ticketType,
-                        userId = userDetails?.id
-                    )
-                    ticketRepo.save(newTicket).flatMap { ticket ->
-                        val key: Key = Keys.hmacShaKeyFor(jwtTicketConfig.key.toByteArray())
-                        val jws = Jwts.builder()
-                            .setSubject(ticket.sub.toString())
-                            .setIssuedAt(ticket.iat)
-                            .setExpiration(ticket.exp)
-                            .claim("zid", ticket.zid)
-                            .claim("ticketType", ticket.ticketType)
-                            .claim("validFrom", ticket.validFrom)
-                            .signWith(key).compact()
-                        ticket.jws = jws
-                        ticket.userId = userDetails?.id
-                        Mono.just(ticketRepo.save(ticket).subscribe()).flatMap {
-                            Mono.just(result.add(ticket.toDTO()))
-                        }
-                    }.subscribe()
+            else {
+                return@flatMap jwtUtils.getDetailsJwt(jwt).flatMap { userDetails ->
+                    for (i in 1..params.quantity) {
+                        val newTicket = TicketPurchased(
+                                zid = params.ticket.zid, exp = params.ticket.exp, iat = params.ticket.iat,
+                                validFrom = params.ticket.validFrom, ticketType = params.ticket.ticketType,
+                                userId = userDetails?.id
+                        )
+                        ticketRepo.save(newTicket).flatMap { ticket ->
+                            val key: Key = Keys.hmacShaKeyFor(jwtTicketConfig.key.toByteArray())
+                            val jws = Jwts.builder()
+                                    .setSubject(ticket.sub.toString())
+                                    .setIssuedAt(ticket.iat)
+                                    .setExpiration(ticket.exp)
+                                    .claim("zid", ticket.zid)
+                                    .claim("ticketType", ticket.ticketType)
+                                    .claim("validFrom", ticket.validFrom)
+                                    .signWith(key).compact()
+                            ticket.jws = jws
+                            ticket.userId = userDetails?.id
+                            Mono.just(ticketRepo.save(ticket).subscribe()).flatMap {
+                                Mono.just(result.add(ticket.toDTO()))
+                            }
+                        }.subscribe()
+                    }
+                    ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(result))
                 }
-                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(result))
             }
         }
             .onErrorResume { println(it); ServerResponse.badRequest().build() }

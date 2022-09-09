@@ -122,6 +122,8 @@ class TicketCatalogueHandler {
             .onErrorResume {println(it); ServerResponse.badRequest().build() }*/
         return request.bodyToMono<TicketType>()
             .flatMap { newTicket ->
+                if(newTicket.price < 0 || newTicket.ageBelow < -1 || newTicket.duration < 1 || newTicket.zones.isNullOrEmpty())
+                    ServerResponse.badRequest().build()
                 if(newTicket.id!=null) {
                     println("TICKET ID NOT NULL")
                     ticketTypeRepo.existsById(newTicket.id!!).flatMap { exists ->
