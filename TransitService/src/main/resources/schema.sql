@@ -1,14 +1,15 @@
 DROP TABLE IF EXISTS qrCodeReaders;
-DROP TABLE IF EXISTS transits;
+-- DROP TABLE IF EXISTS transits;
 
-CREATE TABLE qrCodeReaders
+
+CREATE TABLE IF NOT EXISTS qrCodeReaders
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     jwt varchar (255),
     zone varchar (255)
 );
 
-CREATE TABLE transits
+CREATE TABLE IF NOT EXISTS transits
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     timestamp TIMESTAMP,

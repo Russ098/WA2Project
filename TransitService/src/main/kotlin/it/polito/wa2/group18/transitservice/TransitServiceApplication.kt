@@ -42,13 +42,13 @@ class TransitServiceApplication{
                     QRCodeReaders(null,"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiY3JlZGVudGlhbHMiOiJRUkNvZGUzIiwicm9sZXMiOiJERVZJQ0UiLCJpYXQiOjE2NTQwODUyOTYsImV4cCI6MjY1NDA4ODg5Nn0.146PowAjHZFumwD7QSqoHoKqtQp3y1zK3G1aV0H2BDszNE8dqnt04wyhCCeaS_vfsVXWSR_tOc0Ob602LErqVQ", "C")
                 )
             ).blockLast(Duration.ofSeconds(10))
-            transitRepo.saveAll(
+            /*transitRepo.saveAll(
                 listOf(
-                    Transits(null, Timestamp.from(Instant.ofEpochMilli(1661159351000)), 1, null,1,true),
+                        Transits(null, Timestamp.from(Instant.ofEpochMilli(1661159351000)), 1, null,1,true),
                     Transits(null, Timestamp.from(Instant.ofEpochMilli(1661159451000)), 2, null,2,true),
                     Transits(null, Timestamp.from(Instant.ofEpochMilli(1661159651000)), 1, null,3,true)
                 )
-            ).blockLast(Duration.ofSeconds(10))
+            ).blockLast(Duration.ofSeconds(10))*/
         }
     }
 }

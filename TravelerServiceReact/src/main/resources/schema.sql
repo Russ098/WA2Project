@@ -1,15 +1,15 @@
-DROP TABLE IF EXISTS ticketPurchased;
-DROP TABLE IF EXISTS userDetails;
-DROP TABLE IF EXISTS userProfile;
+-- DROP TABLE IF EXISTS ticketPurchased;
+-- DROP TABLE IF EXISTS userDetails;
+-- DROP TABLE IF EXISTS userProfile;
 
-CREATE TABLE userDetails
+CREATE TABLE IF NOT EXISTS userDetails
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     username varchar (255),
     roles varchar (255)
 );
 
-CREATE TABLE ticketPurchased
+CREATE TABLE IF NOT EXISTS ticketPurchased
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     iat timestamp,
@@ -22,7 +22,7 @@ CREATE TABLE ticketPurchased
     FOREIGN KEY (userId) REFERENCES userDetails(id)
 );
 
-CREATE TABLE userProfile
+CREATE TABLE IF NOT EXISTS userProfile
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name varchar (255),

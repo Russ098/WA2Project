@@ -33,7 +33,7 @@ companion object{
         return initializer
     }
 
-    @Bean
+    /*@Bean
     fun populator(ticketTypeRepo: TicketTypeRepository, ticketOrderRepo: TicketOrderRepository): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
             ticketTypeRepo.saveAll(
@@ -47,6 +47,6 @@ companion object{
                 )
             ).blockLast(Duration.ofSeconds(10))
         }
-    }
+    }*/
 
 }
